@@ -9,7 +9,7 @@ export default function MyPostulatesPage() {
   return (
     <main className="flex min-h-screen min-w-[100%] flex-col items-center justify-center gap-5 bg-[url(Images/Backgrounds/WhiteBackground.png)] bg-[length:100%_100%]">
       <p className="text-[48px] font-[600] text-[#7AC3C4] font-['Kartika','Montserrat', 'Poppins', 'Roboto', 'Helvetica', 'Arial']">
-        docu4rent
+        PAGINA MY POSTULATES
       </p>
       <p className="text-[48px] font-[600] text-[#7AC3C4] font-['Kartika','Montserrat', 'Poppins', 'Roboto', 'Helvetica', 'Arial']">
         docu4rent
