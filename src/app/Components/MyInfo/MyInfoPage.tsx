@@ -3,7 +3,7 @@ import { useState } from "react";
 import { GoogleIcon } from "@/app/Images/Icons/GoogleIcon";
 import { Box, TextField } from "@mui/material";
 
-export default function HomePage() {
+export default function MyInfoPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   return (
