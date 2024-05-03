@@ -6,6 +6,7 @@ import PersonOutlineRoundedIcon from "@mui/icons-material/PersonOutlineRounded";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import FolderOpenOutlinedIcon from "@mui/icons-material/FolderOpenOutlined";
 import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
+import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
 interface PageProps {
   activeHomeValue?: boolean;
   activeMyInfoValue?: boolean;
@@ -73,44 +74,50 @@ const Docu4rentNavbar: React.FC<PageProps> = ({
       <p className="text-[38px] font-[600] text-[#7AC3C4] font-['Kartika','Montserrat', 'Poppins', 'Roboto', 'Helvetica', 'Arial']">
         docu4rent
       </p>
-      <div className="flex flex-row items-center gap-2">
-        <HomeOutlinedIcon htmlColor={activeHome ? "#7AC3C4" : "#A6A6A6"} />
-        <h1
-          className={activeHome ? activeItemText : inactiveItemText}
-          onClick={() => GoToHome()}
-        >
+      <div
+        onClick={() => GoToHome()}
+        className="flex flex-row items-center gap-2"
+      >
+        <HomeOutlinedIcon
+          className="cursor-pointer"
+          htmlColor={activeHome ? "#7AC3C4" : "#A6A6A6"}
+        />
+        <h1 className={activeHome ? activeItemText : inactiveItemText}>
           Inicio
         </h1>
       </div>
-      <div className="flex flex-row items-center gap-2">
+      <div
+        onClick={() => GoToMyInfo()}
+        className="flex flex-row items-center gap-2"
+      >
         <FolderOpenOutlinedIcon
           htmlColor={activeMyInfo ? "#7AC3C4" : "#A6A6A6"}
+          className="cursor-pointer"
         />
-        <h1
-          className={activeMyInfo ? activeItemText : inactiveItemText}
-          onClick={() => GoToMyInfo()}
-        >
+        <h1 className={activeMyInfo ? activeItemText : inactiveItemText}>
           Mi información
         </h1>
       </div>
 
-      <div className="flex flex-row items-center gap-2">
+      <div
+        onClick={() => GoToMyPostulates()}
+        className="flex flex-row items-center gap-2"
+      >
         <CalendarMonthRoundedIcon
           htmlColor={activeMyPostulates ? "#7AC3C4" : "#A6A6A6"}
+          className="cursor-pointer"
         />
-        <h1
-          className={activeMyPostulates ? activeItemText : inactiveItemText}
-          onClick={() => GoToMyPostulates()}
-        >
+        <h1 className={activeMyPostulates ? activeItemText : inactiveItemText}>
           Mis postulaciones
         </h1>
       </div>
 
-      <div className="flex flex-row items-center gap-2">
+      <div className="flex flex-row items-center gap-2 cursor-pointer">
         <PersonOutlineRoundedIcon htmlColor="#7AC3C4" />
-        <h4 className="text-[10px]" onClick={() => Logout()}>
+        <h4 className="text-[10px] text-[#7AC3C4]" onClick={() => Logout()}>
           Log out
         </h4>
+        <KeyboardArrowDownRoundedIcon htmlColor="#7AC3C4" />
       </div>
     </div>
   );
