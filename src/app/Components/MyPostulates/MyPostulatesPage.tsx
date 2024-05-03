@@ -7,7 +7,8 @@ export default function MyPostulatesPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   return (
-    <main className="flex min-h-screen min-w-[100%] flex-col items-center justify-center gap-5 bg-[url(Images/Backgrounds/WhiteBackground.png)] bg-[length:100%_100%]">
+    <main className="flex min-h-screen min-w-[100%] flex-col items-center justify-center gap-5 ">
+      hola
       <p className="text-[48px] font-[600] text-[#7AC3C4] font-['Kartika','Montserrat', 'Poppins', 'Roboto', 'Helvetica', 'Arial']">
         PAGINA MY POSTULATES
       </p>
