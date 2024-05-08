@@ -114,7 +114,13 @@ const Docu4rentNavbar: React.FC<PageProps> = ({
 
       <div className="flex flex-row items-center gap-2 cursor-pointer">
         <PersonOutlineRoundedIcon htmlColor="#7AC3C4" />
-        <h4 className="text-[10px] text-[#7AC3C4]" onClick={() => Logout()}>
+        <h4
+          className="text-[10px] text-[#7AC3C4]"
+          onClick={() => {
+            router.push("/");
+            // Logout();
+          }}
+        >
           Log out
         </h4>
         <KeyboardArrowDownRoundedIcon htmlColor="#7AC3C4" />

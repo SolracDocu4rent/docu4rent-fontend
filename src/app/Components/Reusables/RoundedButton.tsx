@@ -36,11 +36,13 @@ const RoundedButton: React.FC<PageProps> = ({
     "text-[14px] text-[lightgray] p-2.5 rounded-full cursor-pointer text-center border-2 border-gray-50 flex flex-row items-center justify-center gap-2.5 min-w-[250px]";
 
   return (
-    <div className={!disabled ? button : disabledButton}>
+    <div
+      onClick={!disabled ? () => executableFunction() : undefined}
+      className={!disabled ? button : disabledButton}
+    >
       {icon === null ? "" : icon}
       <h4
-        //className={!disabled ? button : disabledButton}
-        onClick={!disabled ? () => executableFunction() : undefined}
+      //className={!disabled ? button : disabledButton}
       >
         {buttonText}
       </h4>

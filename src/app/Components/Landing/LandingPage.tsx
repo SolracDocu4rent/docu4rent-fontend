@@ -2,10 +2,12 @@ import RoundedButton from "../Reusables/RoundedButton";
 import { useState } from "react";
 import { GoogleIcon } from "@/app/Images/Icons/GoogleIcon";
 import { Box, TextField } from "@mui/material";
+import { useRouter } from "next/navigation";
 
 export default function LandingPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const router = useRouter();
   return (
     <main className="flex min-h-screen min-w-[100%] flex-col items-center justify-center gap-5 ">
       <p className="text-[48px] font-[600] text-[#7AC3C4] font-['Kartika','Montserrat', 'Poppins', 'Roboto', 'Helvetica', 'Arial']">
@@ -22,7 +24,7 @@ export default function LandingPage() {
       />
       <p className="text-[12px]">o continuar con</p>
       <TextField
-        id="outlined-basic"
+        id="email-field"
         label="Correo Electrónico"
         variant="outlined"
         size="small"
@@ -41,7 +43,7 @@ export default function LandingPage() {
         onChange={({ target: { value } }) => setEmail(value)}
       />
       <TextField
-        id="outlined-basic"
+        id="password-field"
         label="Contraseña"
         variant="outlined"
         size="small"
@@ -64,7 +66,7 @@ export default function LandingPage() {
       <div>
         <RoundedButton
           executableFunction={() => {
-            console.log("click");
+            router.push("/Home");
           }}
           buttonText="Entrar"
           rounded={false}
