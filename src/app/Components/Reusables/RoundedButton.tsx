@@ -9,6 +9,9 @@ interface PageProps {
   boldText?: boolean; //true= bold text. false = regular text weight
   border?: boolean; //true=addborder. false = no border
   shadow?: boolean; //true=addshadow. false = no shadow
+  primaryBackgroundColor?: boolean; //true= greenish background false: no background
+  whiteTextColor?: boolean; //true= white text false: black text
+  standardSize?: boolean; //true= standard 250px width false: fit content
 }
 
 const RoundedButton: React.FC<PageProps> = ({
@@ -20,18 +23,30 @@ const RoundedButton: React.FC<PageProps> = ({
   boldText = false,
   border = false,
   shadow = false,
+  primaryBackgroundColor = false,
+  whiteTextColor = false,
+  standardSize = true,
 }) => {
   let addRound = rounded === true ? " rounded-full " : " rounded ";
   let addBoldText = boldText === true ? " font-semibold " : "";
   let addBorder = border === true ? " border-2 border-gray-50 " : "";
   let addShadow = shadow === true ? " shadow-md " : "";
+  let addBackgroundColor =
+    primaryBackgroundColor === true ? " bg-[#609D9E]" : "";
+  let addTextColor =
+    whiteTextColor === true ? " text-[#FFFFFF] " : " text-[#121212] ";
+  let addWidth = standardSize === true ? " min-w-[250px] " : "";
+
   const button =
-    "text-[14px] p-2.5 cursor-pointer text-center  flex flex-row items-center justify-center gap-2.5 min-w-[250px] hover:font-bold hover:shadow-lg " +
+    "text-[14px] p-2.5 cursor-pointer text-center  flex flex-row items-center justify-center gap-2.5 hover:font-bold hover:shadow-lg " +
     addRound +
     addBoldText +
     addBorder +
-    addShadow;
-
+    addShadow +
+    addBackgroundColor +
+    addTextColor +
+    whiteTextColor +
+    addWidth;
   const disabledButton =
     "text-[14px] text-[lightgray] p-2.5 rounded-full cursor-pointer text-center border-2 border-gray-50 flex flex-row items-center justify-center gap-2.5 min-w-[250px]";
 

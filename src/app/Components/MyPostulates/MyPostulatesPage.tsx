@@ -224,7 +224,18 @@ export default function MyPostulatesPage() {
             <p className="text-[14px] font-medium text-[#A6A6A6]">
               Revisa el status de tus postulaciones
             </p>
-            <div>boton</div>
+            <div className="pb-[20px]">
+              <RoundedButton
+                executableFunction={() => {
+                  console.log("click");
+                }}
+                buttonText="Enviar Documento"
+                rounded={true}
+                primaryBackgroundColor={true}
+                whiteTextColor={true}
+                standardSize={false}
+              />
+            </div>
           </div>
           <DataGrid
             rows={arrayOfRows}
