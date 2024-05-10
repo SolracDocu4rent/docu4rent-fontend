@@ -47,7 +47,7 @@ export default function HomePage() {
       y[cont] = (
         <div
           key={index?.key}
-          className="flex flex-row justify-between items-center "
+          className="flex flex-row justify-between items-center hover:bg-[#EBEBEB] rounded-lg"
         >
           <div className="flex flex-row items-center gap-3">
             <NotificationsNoneRoundedIcon htmlColor="#121212" />
@@ -76,18 +76,18 @@ export default function HomePage() {
         <p className="text-[#609D9E] text-[16px] font-bold pb-[20px]">
           NOTIFICACIONES
         </p>
-        <div className="border-[2.5px] border-gray rounded-lg p-3 ">
+        <div className="border-[2.5px] border-gray rounded-lg p-3 bg-[#FFFFFF]">
           <div className="flex flex-row items-center justify-between pb-2">
             <p className="text-[#609D9E] text-[16px] font-bold pb-[10px]">
               Últimas postulaciones
             </p>
-            <div className="flex flex-row items-center cursor-pointer">
+            <div className="flex flex-row items-center cursor-pointer ">
               <AddBoxOutlinedIcon htmlColor="#093BA0" />
               <p
                 onClick={() => {
                   router.push("/MyPostulates");
                 }}
-                className="text-[#093BA0] font-semibold text-[14px] "
+                className="text-[#093BA0] font-semibold hover:font-bold text-[14px] "
               >
                 Ver todos
               </p>
