@@ -43,7 +43,7 @@ let step1InputsArray: {
     input_id: 2,
     input_type: 1, //0== textfield, 1 == combobox, 2==upload
     upper_text: "Plazo para acceder a la información",
-    options: ["lugar1", "lugar2", "lugar3"],
+    options: ["1 día", "1 semana", "1 mes"],
     input_value: "",
     input_label: "Selecciona el plazo",
     first_input: {},

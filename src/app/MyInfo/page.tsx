@@ -10,6 +10,7 @@ import MyInfoPageStep3 from "../Components/MyInfo/Step3/MyInfoPageStep3";
 import MyInfoPageStep4 from "../Components/MyInfo/Step4/MyInfoPageStep4";
 import step1InputsArray from "../Components/MyInfo/Step1/Step1InputsArray";
 import step2InputsArray from "../Components/MyInfo/Step2/Step2InputsArray";
+import step3InputsArray from "../Components/MyInfo/Step3/Step3InputsArray";
 
 export default function MyInfoPage() {
   const [step, setStep] = useState(1);
@@ -17,11 +18,12 @@ export default function MyInfoPage() {
   const [isPerson, setisPerson] = useState(false);
   const [step1InputsArrayState, setstep1InputsArrayState] = useState([{}]);
   const [step2InputsArrayState, setstep2InputsArrayState] = useState([{}]);
-
+  const [step3InputsArrayState, setstep3InputsArrayState] = useState([{}]);
   useEffect(() => {
     //trae los datos cuando se entra a la pagina airlines
     setstep1InputsArrayState(step1InputsArray);
     setstep2InputsArrayState(step2InputsArray);
+    setstep3InputsArrayState(step3InputsArray);
   }, []);
 
   return (
@@ -47,7 +49,15 @@ export default function MyInfoPage() {
           isPerson={isPerson}
         />
       )}
-      {step === 3 && <MyInfoPageStep3 />}
+      {step === 3 && (
+        <MyInfoPageStep3
+          step3InputsArrayState={step3InputsArrayState}
+          setstep3InputsArrayState={setstep3InputsArrayState}
+          setStep={setStep}
+          isCompany={isCompany}
+          isPerson={isPerson}
+        />
+      )}
       {step === 4 && <MyInfoPageStep4 />}
     </main>
   );

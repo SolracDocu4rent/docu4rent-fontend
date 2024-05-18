@@ -4,6 +4,7 @@ import { GoogleIcon } from "@/app/Images/Icons/GoogleIcon";
 import { Box, TextField } from "@mui/material";
 import { StandardInput } from "../../Reusables/StandardInput";
 import { StandardCombobox } from "../../Reusables/StandardCombobox";
+import { StandardDownloadInput } from "../../Reusables/StandardDownloadInput";
 
 interface ComponentProps {
   step2InputsArrayState: any;
@@ -13,7 +14,7 @@ interface ComponentProps {
   isPerson: boolean;
 }
 
-export default function MyInfoPageStep2({
+export default function MyInfoPageStep3({
   step2InputsArrayState,
   setstep2InputsArrayState,
   setStep,
@@ -66,7 +67,15 @@ export default function MyInfoPageStep2({
                 defaultValue={index.input_value}
               />
             ) : index?.input_type === 2 ? (
-              <div>Download Input</div>
+              <StandardDownloadInput
+                upperText={index.upper_text}
+                setValueInArray={(value: string, position: number) =>
+                  setValueInArray(value, index.input_id)
+                }
+                arrayPosition={index.input_id}
+                label={index?.input_label}
+                defaultValue={index.input_value}
+              />
             ) : index?.input_type === 3 ? (
               <div className="w-[100%] flex flex-col gap-3">
                 <StandardCombobox
@@ -135,7 +144,7 @@ export default function MyInfoPageStep2({
           />
           <RoundedButton
             executableFunction={() => {
-              setStep(2);
+              setStep(3);
             }}
             buttonText="Siguiente"
             rounded

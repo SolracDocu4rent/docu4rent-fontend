@@ -4,6 +4,7 @@ import { GoogleIcon } from "@/app/Images/Icons/GoogleIcon";
 import { Box, TextField } from "@mui/material";
 import { StandardInput } from "../../Reusables/StandardInput";
 import { StandardCombobox } from "../../Reusables/StandardCombobox";
+import { StandardDownloadInput } from "../../Reusables/StandardDownloadInput";
 
 interface ComponentProps {
   step1InputsArrayState: any;
@@ -62,7 +63,15 @@ export default function MyInfoPageStep1({
               defaultValue={index.input_value}
             />
           ) : index?.input_type === 2 ? (
-            <div>Download Input</div>
+            <StandardDownloadInput
+              upperText={index.upper_text}
+              setValueInArray={(value: string, position: number) =>
+                setValueInArray(value, index.input_id)
+              }
+              arrayPosition={index.input_id}
+              label={index?.input_label}
+              defaultValue={index.input_value}
+            />
           ) : index?.input_type === 3 ? (
             <div className="w-[100%] flex flex-col gap-3">
               <StandardCombobox
