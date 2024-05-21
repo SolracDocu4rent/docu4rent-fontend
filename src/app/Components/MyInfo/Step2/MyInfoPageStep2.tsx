@@ -12,6 +12,8 @@ interface ComponentProps {
   setStep: (value: number) => void;
   isCompany: boolean;
   isPerson: boolean;
+  setIsDependantPerson: (value: boolean) => void;
+  setIsIndependantPerson: (value: boolean) => void;
 }
 
 export default function MyInfoPageStep3({
@@ -20,6 +22,8 @@ export default function MyInfoPageStep3({
   setStep,
   isCompany,
   isPerson,
+  setIsDependantPerson,
+  setIsIndependantPerson,
 }: ComponentProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -35,7 +39,6 @@ export default function MyInfoPageStep3({
     let y: any = [];
     let cont = 0;
     step2InputsArrayState.map((index: any) => {
-      console.log("label", index?.label);
       if (
         (isPerson === true && index?.is_person === true) ||
         (isCompany === true && index?.is_company === true)
@@ -144,6 +147,13 @@ export default function MyInfoPageStep3({
           />
           <RoundedButton
             executableFunction={() => {
+              if (step2InputsArrayState[15].input_value === "Dependiente") {
+                setIsDependantPerson(true);
+                setIsIndependantPerson(false);
+              } else {
+                setIsDependantPerson(false);
+                setIsIndependantPerson(true);
+              }
               setStep(3);
             }}
             buttonText="Siguiente"

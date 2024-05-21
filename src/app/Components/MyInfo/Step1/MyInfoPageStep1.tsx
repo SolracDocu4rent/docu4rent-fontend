@@ -35,7 +35,6 @@ export default function MyInfoPageStep1({
     let y: any = [];
     let cont = 0;
     step1InputsArrayState.map((index: any) => {
-      console.log("label", index?.label);
       y[cont] = (
         <div
           key={cont}

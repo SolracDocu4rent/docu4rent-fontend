@@ -91,7 +91,7 @@ let step2InputsArray: {
   },
   {
     key: "16",
-    input_id: 5,
+    input_id: 6,
     input_type: 0, //0== textfield, 1 == combobox, 2==upload
     upper_text: "RUT",
     options: [],
@@ -104,7 +104,7 @@ let step2InputsArray: {
   },
   {
     key: "17",
-    input_id: 5,
+    input_id: 7,
     input_type: 0, //0== textfield, 1 == combobox, 2==upload
     upper_text: "RUT Representante legal",
     options: [],
@@ -117,7 +117,7 @@ let step2InputsArray: {
   },
   {
     key: "18",
-    input_id: 5,
+    input_id: 8,
     input_type: 1, //0== textfield, 1 == combobox, 2==upload
     upper_text: "Estado civil",
     options: [
@@ -136,7 +136,7 @@ let step2InputsArray: {
   },
   {
     key: "19",
-    input_id: 5,
+    input_id: 9,
     input_type: 0, //0== textfield, 1 == combobox, 2==upload
     upper_text: "RUT Empresa",
     options: [],
@@ -149,7 +149,7 @@ let step2InputsArray: {
   },
   {
     key: "20",
-    input_id: 5,
+    input_id: 10,
     input_type: 0, //0== textfield, 1 == combobox, 2==upload
     upper_text: "Calle y número",
     options: [],
@@ -162,7 +162,7 @@ let step2InputsArray: {
   },
   {
     key: "21",
-    input_id: 5,
+    input_id: 11,
     input_type: 1, //0== textfield, 1 == combobox, 2==upload
     upper_text: "Comuna",
     options: [
@@ -522,7 +522,7 @@ let step2InputsArray: {
   },
   {
     key: "22",
-    input_id: 5,
+    input_id: 12,
     input_type: 0, //0== textfield, 1 == combobox, 2==upload
     upper_text: "Celular",
     options: [],
@@ -535,7 +535,7 @@ let step2InputsArray: {
   },
   {
     key: "23",
-    input_id: 5,
+    input_id: 13,
     input_type: 1, //0== textfield, 1 == combobox, 2==upload
     upper_text: "Nacionalidad",
     options: [
@@ -797,7 +797,7 @@ let step2InputsArray: {
   },
   {
     key: "24",
-    input_id: 5,
+    input_id: 14,
     input_type: 1, //0== textfield, 1 == combobox, 2==upload
     upper_text: "Profesion",
     options: [
@@ -993,7 +993,7 @@ let step2InputsArray: {
   },
   {
     key: "25",
-    input_id: 5,
+    input_id: 15,
     input_type: 1, //0== textfield, 1 == combobox, 2==upload
     upper_text: "Tipo de trabajo",
     options: ["Dependiente", "Independiente"],

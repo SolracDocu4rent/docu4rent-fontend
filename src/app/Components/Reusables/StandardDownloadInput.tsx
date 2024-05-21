@@ -24,7 +24,9 @@ export const StandardDownloadInput = ({
           {upperText}
         </p>
         <div className="rounded border-[1.5px] border-[#BBBBBB] hover:border-[black] h-[40px] flex flex-row items-center justify-between px-3 text-[20px]">
-          <p></p>
+          <p className="text-[14px] text-[lightgray]">
+            {inputValue === "" ? label : inputValue}
+          </p>
           <div className="rounded-[30px] border-[1.5px] border-[#BBBBBB] hover:border-[black] flex  items-center justify-center p-[3px]">
             <FileUploadRoundedIcon htmlColor="#BBBBBB" fontSize="inherit" />
           </div>

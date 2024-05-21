@@ -16,6 +16,8 @@ export default function MyInfoPage() {
   const [step, setStep] = useState(1);
   const [isCompany, setisCompany] = useState(true);
   const [isPerson, setisPerson] = useState(false);
+  const [isDependantPerson, setIsDependantPerson] = useState(false);
+  const [isIndependantPerson, setIsIndependantPerson] = useState(false);
   const [step1InputsArrayState, setstep1InputsArrayState] = useState([{}]);
   const [step2InputsArrayState, setstep2InputsArrayState] = useState([{}]);
   const [step3InputsArrayState, setstep3InputsArrayState] = useState([{}]);
@@ -47,6 +49,8 @@ export default function MyInfoPage() {
           setStep={setStep}
           isCompany={isCompany}
           isPerson={isPerson}
+          setIsDependantPerson={setIsDependantPerson}
+          setIsIndependantPerson={setIsIndependantPerson}
         />
       )}
       {step === 3 && (
@@ -54,6 +58,8 @@ export default function MyInfoPage() {
           step3InputsArrayState={step3InputsArrayState}
           setstep3InputsArrayState={setstep3InputsArrayState}
           setStep={setStep}
+          isDependantPerson={isDependantPerson}
+          isIndependantPerson={isIndependantPerson}
           isCompany={isCompany}
           isPerson={isPerson}
         />
