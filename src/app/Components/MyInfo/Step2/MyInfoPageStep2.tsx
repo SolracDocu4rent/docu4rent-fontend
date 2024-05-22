@@ -110,7 +110,7 @@ export default function MyInfoPageStep3({
                 />
               </div>
             ) : (
-              <>NO</>
+              <>Cargando...</>
             )}
           </div>
         );

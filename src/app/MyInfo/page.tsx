@@ -7,10 +7,13 @@ import MyInfoPageStep1 from "../Components/MyInfo/Step1/MyInfoPageStep1";
 import { useEffect, useState } from "react";
 import MyInfoPageStep2 from "../Components/MyInfo/Step2/MyInfoPageStep2";
 import MyInfoPageStep3 from "../Components/MyInfo/Step3/MyInfoPageStep3";
-import MyInfoPageStep4 from "../Components/MyInfo/Step4/MyInfoPageStep4";
 import step1InputsArray from "../Components/MyInfo/Step1/Step1InputsArray";
 import step2InputsArray from "../Components/MyInfo/Step2/Step2InputsArray";
 import step3InputsArray from "../Components/MyInfo/Step3/Step3InputsArray";
+import SelectPaymentStep from "../Components/MyInfo/Step4-SelectPayment/SelectPaymentStep";
+import OutdatedDataStep from "../Components/MyInfo/Payments/OutdatedDataStep";
+import FailedPaymentStep from "../Components/MyInfo/Payments/FailedPaymentStep";
+import SuccessfulPaymentStep from "../Components/MyInfo/Payments/SuccessfulPaymentStep";
 
 export default function MyInfoPage() {
   const [step, setStep] = useState(1);
@@ -64,7 +67,10 @@ export default function MyInfoPage() {
           isPerson={isPerson}
         />
       )}
-      {step === 4 && <MyInfoPageStep4 />}
+      {step === 4 && <SelectPaymentStep setStep={setStep} />}
+      {step === 99 && <SuccessfulPaymentStep setStep={setStep} />}
+      {step === 100 && <FailedPaymentStep setStep={setStep} />}
+      {step === 101 && <OutdatedDataStep setStep={setStep} />}
     </main>
   );
 }
