@@ -1,5 +1,5 @@
 import RoundedButton from "../../Reusables/RoundedButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { GoogleIcon } from "@/app/Images/Icons/GoogleIcon";
 import { Box, TextField } from "@mui/material";
 import { StandardInput } from "../../Reusables/StandardInput";
@@ -22,13 +22,43 @@ export default function MyInfoPageStep1({
   setisCompany,
 }: ComponentProps) {
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [disabledState, setdisabledState] = useState(false);
 
   const setValueInArray = (inputValue: string, arrayPosition: number) => {
     let auxiliaryArray = step1InputsArrayState;
     auxiliaryArray[arrayPosition].input_value = inputValue;
     setstep1InputsArrayState(auxiliaryArray);
-    console.log(step1InputsArrayState);
+    getDisabledNextButton();
+  };
+
+  useEffect(() => {
+    console.log("step1InputsArrayState", step1InputsArrayState);
+    if (step1InputsArrayState?.lenght > 1) {
+      getDisabledNextButton();
+    } else {
+      setdisabledState(true);
+    }
+  }, []);
+
+  const getDisabledNextButton = () => {
+    if (step1InputsArrayState[0].input_value === "") {
+      setdisabledState(true);
+    } else if (step1InputsArrayState[1].input_value === "") {
+      setdisabledState(true);
+    } else if (step1InputsArrayState[2].input_value === "") {
+      setdisabledState(true);
+    } else if (step1InputsArrayState[3].input_value === "") {
+      setdisabledState(true);
+    } else if (
+      step1InputsArrayState[4].first_input?.input_value === "" ||
+      step1InputsArrayState[4].second_input?.input_value === ""
+    ) {
+      setdisabledState(true);
+    } else if (step1InputsArrayState[5].input_value === "") {
+      setdisabledState(true);
+    } else {
+      setdisabledState(false);
+    }
   };
 
   const arrayPrinterOfInputs = () => {
@@ -79,7 +109,7 @@ export default function MyInfoPageStep1({
                   auxiliaryArray[index.input_id].first_input.input_value =
                     value;
                   setstep1InputsArrayState(auxiliaryArray);
-                  console.log(step1InputsArrayState);
+                  getDisabledNextButton();
                 }}
                 arrayPosition={index.first_input.input_id}
                 upperText={index.upper_text}
@@ -94,7 +124,7 @@ export default function MyInfoPageStep1({
                   auxiliaryArray[index.input_id].second_input.input_value =
                     value;
                   setstep1InputsArrayState(auxiliaryArray);
-                  console.log(step1InputsArrayState);
+                  getDisabledNextButton();
                 }}
                 arrayPosition={index.second_input.input_id}
                 label={index.second_input.input_label}
@@ -154,6 +184,7 @@ export default function MyInfoPageStep1({
             primaryBackgroundColor
             whiteTextColor
             standardSize={false}
+            disabled={disabledState}
           />
         </div>
       </div>
