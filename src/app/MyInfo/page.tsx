@@ -3,13 +3,74 @@ import Image from "next/image";
 import WhiteBackground from "./Images/Backgrounds/WhiteBackground.png";
 import HomePage from "../Components/Home/HomePage";
 import Docu4rentNavbar from "../Components/Reusables/Docu4rentNavbar";
-import MyInfoPage from "../Components/MyInfo/MyInfoPage";
+import MyInfoPageStep1 from "../Components/MyInfo/Step1/MyInfoPageStep1";
+import { useEffect, useState } from "react";
+import MyInfoPageStep2 from "../Components/MyInfo/Step2/MyInfoPageStep2";
+import MyInfoPageStep3 from "../Components/MyInfo/Step3/MyInfoPageStep3";
+import step1InputsArray from "../Components/MyInfo/Step1/Step1InputsArray";
+import step2InputsArray from "../Components/MyInfo/Step2/Step2InputsArray";
+import step3InputsArray from "../Components/MyInfo/Step3/Step3InputsArray";
+import SelectPaymentStep from "../Components/MyInfo/Step4-SelectPayment/SelectPaymentStep";
+import OutdatedDataStep from "../Components/MyInfo/Payments/OutdatedDataStep";
+import FailedPaymentStep from "../Components/MyInfo/Payments/FailedPaymentStep";
+import SuccessfulPaymentStep from "../Components/MyInfo/Payments/SuccessfulPaymentStep";
 
-export default function MyInfo() {
+export default function MyInfoPage() {
+  const [step, setStep] = useState(1);
+  const [isCompany, setisCompany] = useState(true);
+  const [isPerson, setisPerson] = useState(false);
+  const [isDependantPerson, setIsDependantPerson] = useState(false);
+  const [isIndependantPerson, setIsIndependantPerson] = useState(false);
+  const [step1InputsArrayState, setstep1InputsArrayState] = useState([{}]);
+  const [step2InputsArrayState, setstep2InputsArrayState] = useState([{}]);
+  const [step3InputsArrayState, setstep3InputsArrayState] = useState([{}]);
+  useEffect(() => {
+    //trae los datos cuando se entra a la pagina airlines
+    setstep1InputsArrayState(step1InputsArray);
+    setstep2InputsArrayState(step2InputsArray);
+    setstep3InputsArrayState(step3InputsArray);
+  }, []);
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-center text-[#121212]">
       <Docu4rentNavbar activeMyInfoValue />
-      <MyInfoPage />
+
+      {step === 0 && <>Loading...</>}
+      {step === 1 && (
+        <MyInfoPageStep1
+          step1InputsArrayState={step1InputsArrayState}
+          setstep1InputsArrayState={setstep1InputsArrayState}
+          setStep={setStep}
+          setisCompany={setisCompany}
+          setisPerson={setisPerson}
+        />
+      )}
+      {step === 2 && (
+        <MyInfoPageStep2
+          step2InputsArrayState={step2InputsArrayState}
+          setstep2InputsArrayState={setstep2InputsArrayState}
+          setStep={setStep}
+          isCompany={isCompany}
+          isPerson={isPerson}
+          setIsDependantPerson={setIsDependantPerson}
+          setIsIndependantPerson={setIsIndependantPerson}
+        />
+      )}
+      {step === 3 && (
+        <MyInfoPageStep3
+          step3InputsArrayState={step3InputsArrayState}
+          setstep3InputsArrayState={setstep3InputsArrayState}
+          setStep={setStep}
+          isDependantPerson={isDependantPerson}
+          isIndependantPerson={isIndependantPerson}
+          isCompany={isCompany}
+          isPerson={isPerson}
+        />
+      )}
+      {step === 4 && <SelectPaymentStep setStep={setStep} />}
+      {step === 99 && <SuccessfulPaymentStep setStep={setStep} />}
+      {step === 100 && <FailedPaymentStep setStep={setStep} />}
+      {step === 101 && <OutdatedDataStep setStep={setStep} />}
     </main>
   );
 }

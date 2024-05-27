@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import styles from "./GreenButton2.style.module.css";
 import { useMediaQuery } from "@mui/material";
 interface PageProps {
@@ -27,6 +28,10 @@ const RoundedButton: React.FC<PageProps> = ({
   whiteTextColor = false,
   standardSize = true,
 }) => {
+  const [disabledState, setdisabledState] = useState(false);
+  useEffect(() => {
+    disabled ? setdisabledState(true) : setdisabledState(false);
+  }, []);
   let addRound = rounded === true ? " rounded-full " : " rounded ";
   let addBoldText = boldText === true ? " font-semibold " : "";
   let addBorder = border === true ? " border-2 border-gray-50 " : "";
@@ -38,7 +43,7 @@ const RoundedButton: React.FC<PageProps> = ({
   let addWidth = standardSize === true ? " min-w-[250px] " : "";
 
   const button =
-    "text-[14px] p-2.5 cursor-pointer text-center  flex flex-row items-center justify-center gap-2.5 hover:font-bold hover:shadow-lg " +
+    "text-[14px] py-2 px-7 cursor-pointer text-center  flex flex-row items-center justify-center gap-2.5 hover:font-bold hover:shadow-lg " +
     addRound +
     addBoldText +
     addBorder +
@@ -48,8 +53,14 @@ const RoundedButton: React.FC<PageProps> = ({
     whiteTextColor +
     addWidth;
   const disabledButton =
-    "text-[14px] text-[lightgray] p-2.5 rounded-full cursor-pointer text-center border-2 border-gray-50 flex flex-row items-center justify-center gap-2.5 min-w-[250px]";
-
+    "text-[14px] bg-[lightgray] py-2 px-7 cursor-pointer text-center  flex flex-row items-center justify-center gap-2.5 hover:font-bold hover:shadow-lg " +
+    addRound +
+    addBoldText +
+    addBorder +
+    addShadow +
+    addTextColor +
+    whiteTextColor +
+    addWidth;
   return (
     <div
       onClick={!disabled ? () => executableFunction() : undefined}
