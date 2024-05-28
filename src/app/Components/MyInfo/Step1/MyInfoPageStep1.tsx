@@ -32,29 +32,36 @@ export default function MyInfoPageStep1({
   };
 
   useEffect(() => {
-    console.log("step1InputsArrayState", step1InputsArrayState);
+    console.log("step1InputsArrayState?.lenght", step1InputsArrayState?.lenght);
     if (step1InputsArrayState?.lenght > 1) {
-      getDisabledNextButton();
+      //getDisabledNextButton();
     } else {
-      setdisabledState(true);
+      console.log("DISABLE EN VERDADERO1");
+      //setdisabledState(true);
     }
   }, []);
 
   const getDisabledNextButton = () => {
     if (step1InputsArrayState[0].input_value === "") {
+      console.log("DISABLE EN VERDADERO2");
       setdisabledState(true);
     } else if (step1InputsArrayState[1].input_value === "") {
+      console.log("DISABLE EN VERDADERO3");
       setdisabledState(true);
     } else if (step1InputsArrayState[2].input_value === "") {
+      console.log("DISABLE EN VERDADERO4");
       setdisabledState(true);
     } else if (step1InputsArrayState[3].input_value === "") {
+      console.log("DISABLE EN VERDADERO5");
       setdisabledState(true);
     } else if (
       step1InputsArrayState[4].first_input?.input_value === "" ||
       step1InputsArrayState[4].second_input?.input_value === ""
     ) {
+      console.log("DISABLE EN VERDADERO6");
       setdisabledState(true);
     } else if (step1InputsArrayState[5].input_value === "") {
+      console.log("DISABLE EN VERDADERO7");
       setdisabledState(true);
     } else {
       setdisabledState(false);
