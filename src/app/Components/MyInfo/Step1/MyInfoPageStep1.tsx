@@ -22,7 +22,7 @@ export default function MyInfoPageStep1({
   setisCompany,
 }: ComponentProps) {
   const [email, setEmail] = useState("");
-  const [disabledState, setdisabledState] = useState(false);
+  const [disabledState, setdisabledState] = useState(true);
 
   const setValueInArray = (inputValue: string, arrayPosition: number) => {
     let auxiliaryArray = step1InputsArrayState;
