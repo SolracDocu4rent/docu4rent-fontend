@@ -1,6 +1,6 @@
 import RoundedButton from "../../Reusables/RoundedButton";
 import { useState } from "react";
-import { GoogleIcon } from "@/app/Images/Icons/GoogleIcon";
+import { GoogleIcon } from "@/Images/Icons/GoogleIcon";
 import { Box, TextField } from "@mui/material";
 import { StandardInput } from "../../Reusables/StandardInput";
 import { StandardCombobox } from "../../Reusables/StandardCombobox";

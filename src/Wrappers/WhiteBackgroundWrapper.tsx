@@ -14,7 +14,7 @@ export default function WhiteBackgroundWrapper({
   children: React.ReactNode;
 }>) {
   return (
-    <section className="bg-[url(Images/Backgrounds/WhiteBackground.png)] bg-[length:100%_100%]">
+    <section className="bg-[url(./Images/Backgrounds/WhiteBackground.png)] bg-[length:100%_100%]">
       {children}
     </section>
   );

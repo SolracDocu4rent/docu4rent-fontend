@@ -1,9 +1,9 @@
 "use client";
 import Image from "next/image";
-import WhiteBackground from "./Images/Backgrounds/WhiteBackground.png";
-import HomePage from "../Components/Home/HomePage";
-import Docu4rentNavbar from "../Components/Reusables/Docu4rentNavbar";
-import MyPostulatesPage from "../Components/MyPostulates/MyPostulatesPage";
+// import WhiteBackground from "./Images/Backgrounds/WhiteBackground.png";
+import HomePage from "../../Components/Home/HomePage";
+import Docu4rentNavbar from "../../Components/Reusables/Docu4rentNavbar";
+import MyPostulatesPage from "../../Components/MyPostulates/MyPostulatesPage";
 
 export default function MyPostulates() {
   return (
