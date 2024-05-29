@@ -1,6 +1,6 @@
 import RoundedButton from "../Reusables/RoundedButton";
 import { useState } from "react";
-import { GoogleIcon } from "@/Images/Icons/GoogleIcon";
+import { GoogleIcon } from "@/app/Images/Icons/GoogleIcon";
 import { Box, TextField } from "@mui/material";
 import { useRouter } from "next/navigation";
 

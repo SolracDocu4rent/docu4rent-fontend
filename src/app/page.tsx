@@ -1,8 +1,6 @@
 "use client";
-import Image from "next/image";
-import WhiteBackground from "./Images/Backgrounds/WhiteBackground.png";
 import LandingPage from "../Components/Landing/LandingPage";
-import WhiteBackgroundWrapper from "../Wrappers/WhiteBackgroundWrapper";
+import WhiteBackgroundWrapper from "@/Components/Wrappers/WhiteBackgroundWrapper";
 
 export default function Landing() {
   return (

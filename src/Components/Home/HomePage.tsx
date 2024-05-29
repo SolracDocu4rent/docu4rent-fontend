@@ -1,6 +1,6 @@
 import RoundedButton from "../Reusables/RoundedButton";
 import { useEffect, useState } from "react";
-import { GoogleIcon } from "@/Images/Icons/GoogleIcon";
+import { GoogleIcon } from "@/app/Images/Icons/GoogleIcon";
 import { Box, TextField } from "@mui/material";
 import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
 import NotificationsNoneRoundedIcon from "@mui/icons-material/NotificationsNoneRounded";
