@@ -3,8 +3,10 @@ import { useState } from "react";
 import { GoogleIcon } from "@/app/Images/Icons/GoogleIcon";
 import { Box, TextField } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { UserAuth } from "@/context/AuthContext";
 
 export default function LandingPage() {
+  const { emailSignIn, user } = UserAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
@@ -65,8 +67,14 @@ export default function LandingPage() {
       <Box sx={{ m: 1 }} />
       <div>
         <RoundedButton
-          executableFunction={() => {
-            router.push("/Home");
+          executableFunction={async () => {
+            try {
+              let user = await emailSignIn(email, password);
+              console.log('user: ', user)
+              router.replace('/home');
+            } catch (error) {
+              console.log('loginError: ', error)
+            }
           }}
           buttonText="Entrar"
           rounded={false}

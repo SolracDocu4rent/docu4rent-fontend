@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import WhiteBackgroundWrapper from "../../Components/Wrappers/WhiteBackgroundWrapper";
+import { LayoutWrapperComponent } from "@/Components/Wrappers/layout-wrapper.component";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -14,5 +15,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <WhiteBackgroundWrapper>{children}</WhiteBackgroundWrapper>;
+  return <LayoutWrapperComponent><WhiteBackgroundWrapper>{children}</WhiteBackgroundWrapper>; </LayoutWrapperComponent>
 }

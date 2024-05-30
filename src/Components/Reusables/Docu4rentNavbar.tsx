@@ -7,6 +7,7 @@ import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
 import FolderOpenOutlinedIcon from "@mui/icons-material/FolderOpenOutlined";
 import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 import KeyboardArrowDownRoundedIcon from "@mui/icons-material/KeyboardArrowDownRounded";
+import { UserAuth } from "@/context/AuthContext";
 interface PageProps {
   activeHomeValue?: boolean;
   activeMyInfoValue?: boolean;
@@ -25,35 +26,14 @@ const Docu4rentNavbar: React.FC<PageProps> = ({
   }, []);
 
   const router = useRouter();
+  const { logOut, user } = UserAuth();
   const [activeHome, setHomeFligths] = useState(false);
   const [activeMyInfo, setActiveMyInfo] = useState(false);
   const [activeMyPostulates, setActiveMyPostulates] = useState(false);
 
-  const Logout = async () => {
-    const fetchData = async () => {
-      try {
-        const url = "/api/logout";
-        const requestOptions = {
-          method: "POST",
-          body: JSON.stringify({
-            userToken: localStorage.getItem("userToken"),
-          }),
-        };
-        const response = await fetch(url, requestOptions).then((res) =>
-          res.json().then((result) => {
-            router.push("/");
-          })
-        );
-      } catch (error) {
-        console.error("Error geting user", error);
-        return;
-      }
-    };
-    await fetchData().catch(console.error);
-  };
 
   const GoToHome = () => {
-    router.push("/Home");
+    router.push("/home");
   };
 
   const GoToMyInfo = () => {
@@ -117,11 +97,10 @@ const Docu4rentNavbar: React.FC<PageProps> = ({
         <h4
           className="text-[10px] text-[#7AC3C4]"
           onClick={() => {
-            router.push("/");
-            // Logout();
+            logOut();
           }}
         >
-          Log out
+          Cerrar sesión
         </h4>
         <KeyboardArrowDownRoundedIcon htmlColor="#7AC3C4" />
       </div>
