@@ -3,9 +3,8 @@ import {
   onAuthStateChanged,
   signInWithEmailAndPassword,
   User,
-  updatePassword,
-  reauthenticateWithCredential,
-  EmailAuthProvider,
+  GoogleAuthProvider,
+  signInWithPopup, 
 } from 'firebase/auth';
 import { useContext, createContext, useState, useEffect, useMemo, useCallback, ReactNode } from 'react';
 
@@ -15,10 +14,12 @@ import firebaseServiceInstance from '@/services/firebase.service';
 const AuthContext = createContext<{
     user: User | null;
     emailSignIn: Function;
+    googleSignIn: Function;
     logOut: Function;
   }>({
     user: null,
     emailSignIn: () => {},
+    googleSignIn: () => {},
     logOut: () => {},
   });
 
@@ -27,6 +28,13 @@ export const AuthContextProvider = ({ children }: { children?: ReactNode }) => {
   const emailSignIn = useCallback(async (email: string, password: string): Promise<User> => {
     console.log('email: ', email)
     const userCredential = await signInWithEmailAndPassword(auth, email, password);
+    const user = userCredential.user;
+    return user;
+  }, []);
+
+  const googleSignIn = useCallback(async (): Promise<User> => {
+    const provider = new GoogleAuthProvider();
+    const userCredential = await signInWithPopup(auth, provider);
     const user = userCredential.user;
     return user;
   }, []);
@@ -48,11 +56,13 @@ export const AuthContextProvider = ({ children }: { children?: ReactNode }) => {
         () => ({
           user,
           emailSignIn,
+          googleSignIn,
           logOut,
         }),
         [
           user,
           emailSignIn,
+          googleSignIn,
           logOut,
         ]
       )}

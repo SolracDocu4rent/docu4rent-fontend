@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import { UserAuth } from "@/context/AuthContext";
 
 export default function LandingPage() {
-  const { emailSignIn, user } = UserAuth();
+  const { emailSignIn, googleSignIn, user } = UserAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
@@ -16,8 +16,13 @@ export default function LandingPage() {
         docu4rent
       </p>
       <RoundedButton
-        executableFunction={() => {
-          console.log("click");
+        executableFunction={async () => {
+          try {
+            await googleSignIn();
+            router.replace('/home');
+          } catch (error) {
+            console.log('loginError: ', error)
+          }
         }}
         buttonText="Entrar con Google"
         icon={<GoogleIcon />}
@@ -70,7 +75,6 @@ export default function LandingPage() {
           executableFunction={async () => {
             try {
               let user = await emailSignIn(email, password);
-              console.log('user: ', user)
               router.replace('/home');
             } catch (error) {
               console.log('loginError: ', error)
