@@ -37,11 +37,11 @@ const Docu4rentNavbar: React.FC<PageProps> = ({
   };
 
   const GoToMyInfo = () => {
-    router.push("/MyInfo");
+    router.push("/personal-information");
   };
 
   const GoToMyPostulates = () => {
-    router.push("/MyPostulates");
+    router.push("/applications");
   };
 
   const activeItemText =

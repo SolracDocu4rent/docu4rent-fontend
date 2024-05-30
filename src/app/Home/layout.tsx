@@ -15,5 +15,5 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <LayoutWrapperComponent><WhiteBackgroundWrapper>{children}</WhiteBackgroundWrapper>; </LayoutWrapperComponent>
+  return <LayoutWrapperComponent><WhiteBackgroundWrapper>{children}</WhiteBackgroundWrapper></LayoutWrapperComponent>;
 }
