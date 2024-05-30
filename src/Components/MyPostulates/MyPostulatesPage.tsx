@@ -1,21 +1,33 @@
 import RoundedButton from "../Reusables/RoundedButton";
 import { useState } from "react";
-import { GoogleIcon } from "@/app/Images/Icons/GoogleIcon";
-import { Box, TextField } from "@mui/material";
+import { Dialog } from "@mui/material";
 import {
   DataGrid,
   GridColDef,
   GridRenderCellParams,
   GridToolbar,
 } from "@mui/x-data-grid";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 
 export default function MyPostulatesPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
+  const [openDetailDialog, setOpenDetailDialog] = useState(false);
+  const [dialogData, setDialogData] = useState({});
   const [formsDataFormatted, setformsDataFormatted] = useState([
     {
       id: "123", //Nro de lote
+      receiver: "",
+      receivingEmail: "nodata", //regulacion
+      endorsement: "", //nombre de producto
+      shippingDate: "", //etapa
+      validityDays: "", //finca
+      status: "Rechazada", //status
+      dateOfCreation: "", //Creado
+      //document: "", //documento
+    },
+    {
+      id: "456", //Nro de lote
       receiver: "",
       receivingEmail: "nodata", //regulacion
       endorsement: "", //nombre de producto
@@ -206,15 +218,37 @@ export default function MyPostulatesPage() {
   }
 
   function RenderApplication(props: GridRenderCellParams<any>) {
+    const innerValueOfRow = props?.row;
     return (
       <div className="text-decoration-line: underline text-[#BBBBBB] cursor-pointer ">
-        <p className="hover:font-semibold">Ver Informe</p>
+        <p
+          onClick={() => {
+            console.log("innerValueOfRow", innerValueOfRow);
+            setDialogData(innerValueOfRow);
+            setOpenDetailDialog(true);
+          }}
+          className="hover:font-semibold"
+        >
+          Ver Informe
+        </p>
       </div>
     );
   }
 
   return (
     <main className="flex min-h-screen min-w-[100%] flex-col items-center gap-5 pt-[130px] font-['Montserrat', 'Poppins', 'Roboto', 'Helvetica', 'Arial']">
+      <Dialog
+        open={openDetailDialog}
+        onClose={() => setOpenDetailDialog(false)}
+        className=""
+        fullScreen={true}
+      >
+        {dialogData?.id}
+        <CloseRoundedIcon
+          htmlColor="#4d4e56"
+          onClick={() => setOpenDetailDialog(false)}
+        />
+      </Dialog>
       <div className="w-[95%]">
         <div className="w-[100%]">
           <h2 className="text-[28px] font-bold text-[#121212] ">
