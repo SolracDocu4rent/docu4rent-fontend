@@ -45,15 +45,14 @@ export function RouteGuard({ children }: { children: React.ReactNode }) {
       const isAuthenticated = !!user;
       if (isAuthenticated) {
         setFetching(() => true);
-        const userData = await firebaseServiceInstance.getCurrentUser();
+        //const userData = await firebaseServiceInstance.getCurrentUser();
 
-      }
-      if (ONLY_UNAUTHENTICATED_ROUTES.includes(pathName)) {
-        router.replace('/home');
-        return setFetching(() => false);
-      }
-      if (PRIVATE_ROUTES.includes(pathName)) {
-        router.replace('/login');
+        if (ONLY_UNAUTHENTICATED_ROUTES.includes(pathName)) {
+          router.replace('/home');
+          return setFetching(() => false);
+        }
+      } else if (PRIVATE_ROUTES.includes(pathName)) {
+        router.replace('/');
         return;
       }
       setFetching(() => false);
