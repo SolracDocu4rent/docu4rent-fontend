@@ -3,8 +3,10 @@ import { useState } from "react";
 import { GoogleIcon } from "@/app/Images/Icons/GoogleIcon";
 import { Box, TextField } from "@mui/material";
 import { useRouter } from "next/navigation";
+import { UserAuth } from "@/context/AuthContext";
 
 export default function LandingPage() {
+  const { emailSignIn, googleSignIn, user } = UserAuth();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const router = useRouter();
@@ -14,8 +16,13 @@ export default function LandingPage() {
         docu4rent
       </p>
       <RoundedButton
-        executableFunction={() => {
-          console.log("click");
+        executableFunction={async () => {
+          try {
+            await googleSignIn();
+            router.replace('/home');
+          } catch (error) {
+            console.log('loginError: ', error)
+          }
         }}
         buttonText="Entrar con Google"
         icon={<GoogleIcon />}
@@ -65,8 +72,13 @@ export default function LandingPage() {
       <Box sx={{ m: 1 }} />
       <div>
         <RoundedButton
-          executableFunction={() => {
-            router.push("/Home");
+          executableFunction={async () => {
+            try {
+              let user = await emailSignIn(email, password);
+              router.replace('/home');
+            } catch (error) {
+              console.log('loginError: ', error)
+            }
           }}
           buttonText="Entrar"
           rounded={false}
