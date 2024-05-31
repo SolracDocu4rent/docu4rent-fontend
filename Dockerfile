@@ -22,7 +22,7 @@ WORKDIR /app
 ARG ENV_FILE
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN cp ./env/$ENV_FILE .env
+RUN cp ./env/.env.development .env
 
 # Next.js collects completely anonymous telemetry data about general usage.
 # Learn more here: https://nextjs.org/telemetry
