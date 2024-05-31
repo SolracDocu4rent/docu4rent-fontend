@@ -4,9 +4,15 @@ import { useEffect, useState } from "react";
 import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
 import NotificationsNoneRoundedIcon from "@mui/icons-material/NotificationsNoneRounded";
 import { useRouter } from "next/navigation";
+
+interface mock  {
+  key: number;
+  name: string;
+  status: string;
+}
 export default function HomePage() {
   const [email, setEmail] = useState("");
-  const [arrayOfNotifications, setarrayOfNotifications] = useState([]);
+  const [arrayOfNotifications, setarrayOfNotifications] = useState<Array<mock>>([]);
   const router = useRouter();
   let mockdata = [
     { key: 1, name: "nombre1nombre1nombre1nombre1", status: "Rechazada" },
@@ -19,7 +25,7 @@ export default function HomePage() {
     { key: 8, name: "nombre3", status: "Rechazada" },
     { key: 9, name: "nombre4", status: "Aclaración" },
     //{ key: 10, name: "nombre5", status: "Aprobada" },
-  ];
+  ] as Array<mock>;
 
   useEffect(() => {
     //trae los datos cuando se entra a la pagina airlines
