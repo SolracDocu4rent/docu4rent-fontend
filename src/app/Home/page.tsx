@@ -1,5 +1,5 @@
 "use client";
-import HomePage from "@/components/home/HomePage";
+import HomePage from "@/components/home/homePage";
 // import WhiteBackground from "./Images/Backgrounds/WhiteBackground.png";
 
 import Docu4rentNavbar from "@/components/reusables/Docu4rentNavbar";
