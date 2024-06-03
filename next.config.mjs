@@ -3,7 +3,7 @@ const nextConfig = {
     eslint: {
       dirs: ['src'],
     },
-    reactStrictMode: false,
+    reactStrictMode: true,
     output: 'standalone',
   };
   

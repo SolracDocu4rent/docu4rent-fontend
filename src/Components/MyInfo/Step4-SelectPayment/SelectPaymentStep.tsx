@@ -1,7 +1,6 @@
 import { useState } from "react";
-import RoundedButton from "../../Reusables/RoundedButton";
+import RoundedButton from "@/components/Reusables/RoundedButton";
 import Image from "next/image";
-import MercadoPagoIcon from "@/app/Images/Icons/MercadoPagoIcon.png";
 import MercadoPagoIcon2 from "@/app/Images/Icons/MercadoPagoIcon2.png";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 interface ComponentProps {
