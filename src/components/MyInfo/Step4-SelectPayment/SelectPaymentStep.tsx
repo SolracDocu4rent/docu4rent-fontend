@@ -1,7 +1,7 @@
 import { useState } from "react";
 import RoundedButton from "@/components/reusables/RoundedButton";
 import Image from "next/image";
-import MercadoPagoIcon2 from "@/app/Images/Icons/MercadoPagoIcon2.png";
+import MercadoPagoIcon2 from "@/app/images/Icons/MercadoPagoIcon2.png";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
 interface ComponentProps {
   setStep: (value: number) => void;

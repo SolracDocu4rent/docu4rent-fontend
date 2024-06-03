@@ -14,7 +14,7 @@ export default function GreenBackgroundWrapper({
   children: React.ReactNode;
 }>) {
   return (
-    <section className="bg-[url(Images/Backgrounds/GreenBackground.png)] bg-[length:100%_100%]">
+    <section className="bg-[url(images/Backgrounds/GreenBackground.png)] bg-[length:100%_100%]">
       {children}
     </section>
   );

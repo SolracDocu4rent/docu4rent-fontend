@@ -1,7 +1,10 @@
 "use client";
-// import WhiteBackground from "./Images/Backgrounds/WhiteBackground.png";
-import Docu4rentNavbar from "@/components/reusables/Docu4rentNavbar";
+
 import MyPostulatesPage from "@/components/MyPostulates/MyPostulatesPage";
+import Docu4rentNavbar from "@/components/reusables/Docu4rentNavbar";
+
+// import WhiteBackground from "./Images/Backgrounds/WhiteBackground.png";
+
 
 export default function MyPostulates() {
   return (
