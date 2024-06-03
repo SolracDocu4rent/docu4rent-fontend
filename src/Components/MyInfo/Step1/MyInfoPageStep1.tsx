@@ -1,8 +1,8 @@
-import RoundedButton from "@/components/Reusables/RoundedButton";
+import RoundedButton from "@/components/reusables/RoundedButton";
 import { useEffect, useState } from "react";
-import { StandardInput } from "@/components/Reusables/StandardInput";
-import { StandardCombobox } from "@/components/Reusables/StandardCombobox";
-import { StandardDownloadInput } from "@/components/Reusables/StandardDownloadInput";
+import { StandardInput } from "@/components/reusables/StandardInput";
+import { StandardCombobox } from "@/components/reusables/StandardCombobox";
+import { StandardDownloadInput } from "@/components/reusables/StandardDownloadInput";
 
 interface ComponentProps {
   step1InputsArrayState: any;

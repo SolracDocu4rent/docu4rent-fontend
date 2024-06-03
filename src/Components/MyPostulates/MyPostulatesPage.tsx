@@ -1,4 +1,4 @@
-import RoundedButton from "@/components/Reusables/RoundedButton";
+import RoundedButton from "@/components/reusables/RoundedButton";
 import { useState } from "react";
 
 import {

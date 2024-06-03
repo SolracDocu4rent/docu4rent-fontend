@@ -1,7 +1,7 @@
 "use client";
 // import WhiteBackground from "./Images/Backgrounds/WhiteBackground.png";
-import HomePage from "@/components/Home/HomePage";
-import Docu4rentNavbar from "@/components/Reusables/Docu4rentNavbar";
+import HomePage from "@/components/home/HomePage";
+import Docu4rentNavbar from "@/components/reusables/Docu4rentNavbar";
 
 export default function Home() {
   return (

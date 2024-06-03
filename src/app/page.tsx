@@ -1,5 +1,5 @@
 "use client";
-import LandingPage from "@/components/Landing/LandingPage";
+import LandingPage from "@/components/landing/LandingPage";
 import WhiteBackgroundWrapper from "@/components/wrappers/WhiteBackgroundWrapper";
 
 export default function Landing() {

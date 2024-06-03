@@ -1,5 +1,5 @@
 import { useState } from "react";
-import RoundedButton from "@/components/Reusables/RoundedButton";
+import RoundedButton from "@/components/reusables/RoundedButton";
 import WarningRoundedIcon from "@mui/icons-material/WarningRounded";
 interface ComponentProps {
   setStep: (value: number) => void;
