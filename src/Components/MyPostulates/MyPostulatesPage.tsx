@@ -1,6 +1,6 @@
 import RoundedButton from "../Reusables/RoundedButton";
 import { useState } from "react";
-import { Dialog } from "@mui/material";
+import { Dialog, TextField } from "@mui/material";
 import {
   DataGrid,
   GridColDef,
@@ -13,8 +13,43 @@ export default function MyPostulatesPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [openDetailDialog, setOpenDetailDialog] = useState(false);
-  const [dialogData, setDialogData] = useState({});
+  const [dialogData, setDialogData] = useState({
+    id: "", //Nro de lote
+    receiver: "",
+    receivingEmail: "", //regulacion
+    endorsement: "", //nombre de producto
+    shippingDate: "", //etapa
+    validityDays: "", //finca
+    status: "", //status
+    dateOfCreation: "", //Creado
+    //document: "", //documento
+    nombre: "",
+    apellidoPaterno: "",
+    apellidoMaterno: "",
+    RUT: "",
+    nacionalidad: "",
+    estadoCivil: "",
+    profesion: "",
+    TelefonoContacto: "",
+    correoElectronico: "",
+    region: "",
+    comuna: "",
+    direccion: "",
+    numero: "",
+    dpto: "",
+    nombreEmpresa: "",
+    RutEmpresa: "",
+    telefonoEmpresa: "",
+    direccionEmpresa: "",
+    antiguedadLaboral: "",
+    tipoTrabajador: "",
+    AFP: "",
+    ultimoPago: "",
+    sueldoBase: "",
+    sueldoLiquido: "",
+  });
   const [formsDataFormatted, setformsDataFormatted] = useState([
+    //MOCKDATA
     {
       id: "123", //Nro de lote
       receiver: "",
@@ -25,6 +60,30 @@ export default function MyPostulatesPage() {
       status: "Rechazada", //status
       dateOfCreation: "", //Creado
       //document: "", //documento
+      nombre: "francisca paz",
+      apellidoPaterno: "Neira",
+      apellidoMaterno: "Ribes",
+      RUT: "18.169.151-4",
+      nacionalidad: "chilena",
+      estadoCivil: "soltera",
+      profesion: "Disenadora",
+      TelefonoContacto: "+569123475679",
+      correoElectronico: "fpneira@uc.cl",
+      region: "Metropolitana de santiago",
+      comuna: "Las Condes",
+      direccion: "avenida las condes",
+      numero: "7167",
+      dpto: "116",
+      nombreEmpresa: "Fallabella Financiero SpA",
+      RutEmpresa: "73.123.456-7",
+      telefonoEmpresa: "+562212345679",
+      direccionEmpresa: "Rosario Norte 660 Las Condes",
+      antiguedadLaboral: "1 año y 9 meses",
+      tipoTrabajador: "Dependiente",
+      AFP: "Modelo",
+      ultimoPago: "29/03/2024",
+      sueldoBase: "2600000",
+      sueldoLiquido: "2100000",
     },
     {
       id: "456", //Nro de lote
@@ -36,6 +95,30 @@ export default function MyPostulatesPage() {
       status: "Rechazada", //status
       dateOfCreation: "", //Creado
       //document: "", //documento
+      nombre: "Jose Alejandro",
+      apellidoPaterno: "Romero",
+      apellidoMaterno: "Melendez",
+      RUT: "18.169.151-4",
+      nacionalidad: "chilena",
+      estadoCivil: "soltera",
+      profesion: "Disenadora",
+      TelefonoContacto: "+569123475679",
+      correoElectronico: "fpneira@uc.cl",
+      region: "Metropolitana de santiago",
+      comuna: "Las Condes",
+      direccion: "avenida las condes",
+      numero: "7167",
+      dpto: "116",
+      nombreEmpresa: "Fallabella Financiero SpA",
+      RutEmpresa: "73.123.456-7",
+      telefonoEmpresa: "+562212345679",
+      direccionEmpresa: "Rosario Norte 660 Las Condes",
+      antiguedadLaboral: "1 año y 9 meses",
+      tipoTrabajador: "Dependiente",
+      AFP: "Modelo",
+      ultimoPago: "29/03/2024",
+      sueldoBase: "2600000",
+      sueldoLiquido: "2100000",
     },
   ]);
 
@@ -250,9 +333,10 @@ export default function MyPostulatesPage() {
           <KeyboardArrowLeftRoundedIcon htmlColor="#466197" />
           <p className="text-[#466197] font-medium hover:font-bold">Regresar</p>
         </div>
+
         <div className="px-[10%] py-[85px] ">
           <div className="flex flex-row justify-between">
-            <p className="text-[#466197] font-semibold text-[28px]">
+            <p className="text-[#466197] font-bold text-[28px]">
               Resumen de Postulación
             </p>
             <p className="text-[28px] font-[600] text-[#7AC3C4] font-['Kartika','Montserrat', 'Poppins', 'Roboto', 'Helvetica', 'Arial']">
@@ -260,9 +344,7 @@ export default function MyPostulatesPage() {
             </p>
           </div>
           <div className="bg-[url(Images/Backgrounds/ArrayOf4sBackground.png)] bg-opacity-25 mt-3 py-3 pl-3">
-            <p className="text-[#466197] font-semibold text-[20px]">
-              Indicadores
-            </p>
+            <p className="text-[#466197] font-bold text-[20px]">Indicadores</p>
             <div className="flex flex-row justify-around py-5 ">
               <div className="max-w-[25%] border-[2px] border-[#BBBBB] shadow-md py-5 px-3 rounded-2xl flex flex-col gap-3 bg-[#FFFFFF]">
                 <p className="text-[18px] font-medium ">
@@ -293,8 +375,180 @@ export default function MyPostulatesPage() {
               </div>
             </div>
           </div>
-          <p className="text-[#466197] font-semibold text-[20px] pl-3 pt-5">
+          <p className="text-[#466197] font-bold text-[20px] pl-3 pt-5">
             Ficha personal
+          </p>
+          <div className="flex flex-row gap-[5%] p-5">
+            <div className=" w-[45%] border-b-[2.5px] border-b-gray">
+              <p className="text-[12px] text-[#466197]">Nombres</p>
+              <p className="text-[#121212] text-[18px] ">
+                {dialogData?.nombre}
+              </p>
+            </div>
+            <div className=" w-[22.5%] border-b-[2.5px] border-b-gray">
+              <p className="text-[12px] text-[#466197]">Apellido Paterno</p>
+              <p className="text-[#121212] text-[18px] ">
+                {dialogData?.apellidoPaterno}
+              </p>
+            </div>
+            <div className=" w-[22.5%] border-b-[2.5px] border-b-gray">
+              <p className="text-[12px] text-[#466197]">Apellido Materno</p>
+              <p className="text-[#121212] text-[18px] ">
+                {dialogData?.apellidoMaterno}
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-row gap-[5%] p-5">
+            <div className=" w-[20%] border-b-[2.5px] border-b-gray">
+              <p className="text-[12px] text-[#466197]">RUT</p>
+              <p className="text-[#121212] text-[18px] ">{dialogData?.RUT}</p>
+            </div>
+            <div className=" w-[20%] border-b-[2.5px] border-b-gray">
+              <p className="text-[12px] text-[#466197]">Nacionalidad</p>
+              <p className="text-[#121212] text-[18px] ">
+                {dialogData?.nacionalidad}
+              </p>
+            </div>
+            <div className=" w-[22.5%] border-b-[2.5px] border-b-gray">
+              <p className="text-[12px] text-[#466197]">Estado Civil</p>
+              <p className="text-[#121212] text-[18px] ">
+                {dialogData?.estadoCivil}
+              </p>
+            </div>
+            <div className=" w-[22.5%] border-b-[2.5px] border-b-gray">
+              <p className="text-[12px] text-[#466197]">Profesion</p>
+              <p className="text-[#121212] text-[18px] ">
+                {dialogData?.profesion}
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-row gap-[5%] p-5">
+            <div className=" w-[45%] border-b-[2.5px] border-b-gray">
+              <p className="text-[12px] text-[#466197]">Teléfono de contacto</p>
+              <p className="text-[#121212] text-[18px] ">
+                {dialogData?.TelefonoContacto}
+              </p>
+            </div>
+            <div className=" w-[50%] border-b-[2.5px] border-b-gray">
+              <p className="text-[12px] text-[#466197]">Coreo electrónico</p>
+              <p className="text-[#121212] text-[18px] ">
+                {dialogData?.correoElectronico}
+              </p>
+            </div>
+          </div>
+          <p className="text-[#466197] font-bold text-[20px] pl-3 pt-5">
+            Domicilio
+          </p>
+          <div className="flex flex-row gap-[5%] p-5">
+            <div className=" w-[45%] border-b-[2.5px] border-b-gray">
+              <p className="text-[12px] text-[#466197]">
+                Metropolitana de Santiago
+              </p>
+              <p className="text-[#121212] text-[18px] ">
+                {dialogData?.region}
+              </p>
+            </div>
+            <div className=" w-[50%] border-b-[2.5px] border-b-gray">
+              <p className="text-[12px] text-[#466197]">Comuna</p>
+              <p className="text-[#121212] text-[18px] ">
+                {dialogData?.comuna}
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-row gap-[5%] p-5">
+            <div className=" w-[45%] border-b-[2.5px] border-b-gray">
+              <p className="text-[12px] text-[#466197]">Dirección</p>
+              <p className="text-[#121212] text-[18px] ">
+                {dialogData?.direccion}
+              </p>
+            </div>
+            <div className=" w-[22.5%] border-b-[2.5px] border-b-gray">
+              <p className="text-[12px] text-[#466197]">Número</p>
+              <p className="text-[#121212] text-[18px] ">
+                {dialogData?.numero}
+              </p>
+            </div>
+            <div className=" w-[22.5%] border-b-[2.5px] border-b-gray">
+              <p className="text-[12px] text-[#466197]">Dpto-Block-Torre</p>
+              <p className="text-[#121212] text-[18px] ">{dialogData?.dpto}</p>
+            </div>
+          </div>
+          <p className="text-[#466197] font-bold text-[20px] pl-3 pt-5">
+            Ficha Laboral
+          </p>
+          <div className="flex flex-row gap-[5%] p-5">
+            <div className=" w-[45%] border-b-[2.5px] border-b-gray">
+              <p className="text-[12px] text-[#466197]">Nombre Empresa</p>
+              <p className="text-[#121212] text-[18px] ">
+                {dialogData?.nombreEmpresa}
+              </p>
+            </div>
+            <div className=" w-[22.5%] border-b-[2.5px] border-b-gray">
+              <p className="text-[12px] text-[#466197]">RUT Empresa</p>
+              <p className="text-[#121212] text-[18px] ">
+                {dialogData?.RutEmpresa}
+              </p>
+            </div>
+            <div className=" w-[22.5%] border-b-[2.5px] border-b-gray">
+              <p className="text-[12px] text-[#466197]">Teléfono</p>
+              <p className="text-[#121212] text-[18px] ">
+                {dialogData?.telefonoEmpresa}
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-row gap-[5%] p-5">
+            <div className=" w-[45%] border-b-[2.5px] border-b-gray">
+              <p className="text-[12px] text-[#466197]">Dirección</p>
+              <p className="text-[#121212] text-[18px] ">
+                {dialogData?.direccionEmpresa}
+              </p>
+            </div>
+            <div className=" w-[22.5%] border-b-[2.5px] border-b-gray">
+              <p className="text-[12px] text-[#466197]">Antiguedad Laboral</p>
+              <p className="text-[#121212] text-[18px] ">
+                {dialogData?.antiguedadLaboral}
+              </p>
+            </div>
+            <div className=" w-[22.5%] border-b-[2.5px] border-b-gray">
+              <p className="text-[12px] text-[#466197]">Tipo Trabajador</p>
+              <p className="text-[#121212] text-[18px] ">
+                {dialogData?.tipoTrabajador}
+              </p>
+            </div>
+          </div>
+          <div className="flex flex-row gap-[5%] p-5">
+            <div className=" w-[20%] border-b-[2.5px] border-b-gray">
+              <p className="text-[12px] text-[#466197]">AFP</p>
+              <p className="text-[#121212] text-[18px] ">{dialogData?.AFP}</p>
+            </div>
+            <div className=" w-[20%] border-b-[2.5px] border-b-gray">
+              <p className="text-[12px] text-[#466197]">Último pago</p>
+              <p className="text-[#121212] text-[18px] ">
+                {dialogData?.ultimoPago}
+              </p>
+            </div>
+            <div className=" w-[22.5%] border-b-[2.5px] border-b-gray">
+              <p className="text-[12px] text-[#466197]">Sueldo base</p>
+              <p className="text-[#121212] text-[18px] ">
+                {dialogData?.sueldoBase}
+              </p>
+            </div>
+            <div className=" w-[22.5%] border-b-[2.5px] border-b-gray">
+              <p className="text-[12px] text-[#466197]">Sueldo líquido</p>
+              <p className="text-[#121212] text-[18px] ">
+                {dialogData?.sueldoLiquido}
+              </p>
+            </div>
+          </div>
+        </div>
+        <div
+          className="cursor-pointer flex justify-end px-5 pb-5 w-[100%]"
+          onClick={() => {
+            console.log("click link");
+          }}
+        >
+          <p className="text-[#466197] font-medium hover:font-bold ">
+            link de validacion: www.docu4rent/1233456
           </p>
         </div>
       </Dialog>
