@@ -7,7 +7,7 @@ import {
   GridRenderCellParams,
   GridToolbar,
 } from "@mui/x-data-grid";
-import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
+import KeyboardArrowLeftRoundedIcon from "@mui/icons-material/KeyboardArrowLeftRounded";
 
 export default function MyPostulatesPage() {
   const [email, setEmail] = useState("");
@@ -243,11 +243,60 @@ export default function MyPostulatesPage() {
         className=""
         fullScreen={true}
       >
-        {dialogData?.id}
-        <CloseRoundedIcon
-          htmlColor="#4d4e56"
+        <div
+          className="cursor-pointer flex flex-row absolute top-10 left-10"
           onClick={() => setOpenDetailDialog(false)}
-        />
+        >
+          <KeyboardArrowLeftRoundedIcon htmlColor="#466197" />
+          <p className="text-[#466197] font-medium hover:font-bold">Regresar</p>
+        </div>
+        <div className="px-[10%] py-[85px] ">
+          <div className="flex flex-row justify-between">
+            <p className="text-[#466197] font-semibold text-[28px]">
+              Resumen de Postulación
+            </p>
+            <p className="text-[28px] font-[600] text-[#7AC3C4] font-['Kartika','Montserrat', 'Poppins', 'Roboto', 'Helvetica', 'Arial']">
+              docu4rent
+            </p>
+          </div>
+          <div className="bg-[url(Images/Backgrounds/ArrayOf4sBackground.png)] bg-opacity-25 mt-3 py-3 pl-3">
+            <p className="text-[#466197] font-semibold text-[20px]">
+              Indicadores
+            </p>
+            <div className="flex flex-row justify-around py-5 ">
+              <div className="max-w-[25%] border-[2px] border-[#BBBBB] shadow-md py-5 px-3 rounded-2xl flex flex-col gap-3 bg-[#FFFFFF]">
+                <p className="text-[18px] font-medium ">
+                  Score crediticio:{" "}
+                  <span className="text-[18px] text-[#466197] font-bold">
+                    {" " + 88}
+                  </span>
+                </p>
+                <p className="text-[12px] text-[#466197]">
+                  Puntaje que se le asigna a una persona para determinar si es
+                  un buen pagador, en caso de adquirir un compromiso financiero
+                  o deuda. Va de 0 a 99 y dado par Equifax.
+                </p>
+              </div>
+              <div className="max-w-[25%] border-[2px] border-[#BBBBB] shadow-md py-5 px-3 rounded-2xl flex flex-col gap-3 bg-[#FFFFFF]">
+                <p className="text-[18px] font-medium ">
+                  Valor seguro:{" "}
+                  <span className="text-[18px] text-[#466197] font-bold">
+                    ${700000}
+                  </span>
+                </p>
+                <p className="text-[12px] text-[#466197]">
+                  Se recomienda que el valor total de pago de un arriendo o
+                  dividendo sea un tercio del sueldo líquido del comprador o
+                  arrendatario. Esta información es util al momento de postular
+                  a una vivienda.
+                </p>
+              </div>
+            </div>
+          </div>
+          <p className="text-[#466197] font-semibold text-[20px] pl-3 pt-5">
+            Ficha personal
+          </p>
+        </div>
       </Dialog>
       <div className="w-[95%]">
         <div className="w-[100%]">
