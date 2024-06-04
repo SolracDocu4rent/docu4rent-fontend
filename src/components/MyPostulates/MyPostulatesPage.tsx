@@ -1,4 +1,4 @@
-import RoundedButton from "../Reusables/RoundedButton";
+import RoundedButton from "@/components/reusables/RoundedButton";
 import { useState } from "react";
 import { Dialog, TextField } from "@mui/material";
 import {
