@@ -1,6 +1,6 @@
 'use client';
 import { ReactNode } from 'react';
-import { RouteGuard } from '@/Components/security/route-guard.component';
+import { RouteGuard } from '@/components/security/route-guard.component';
 
 
 

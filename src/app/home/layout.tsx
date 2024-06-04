@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
-import WhiteBackgroundWrapper from "../../Components/Wrappers/WhiteBackgroundWrapper";
-import { LayoutWrapperComponent } from "@/Components/Wrappers/layout-wrapper.component";
+import WhiteBackgroundWrapper from "@/components/wrappers/WhiteBackgroundWrapper";
+import { LayoutWrapperComponent } from "@/components/wrappers/layout-wrapper.component";
 
 const inter = Inter({ subsets: ["latin"] });
 

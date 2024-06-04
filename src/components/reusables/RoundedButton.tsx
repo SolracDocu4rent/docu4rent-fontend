@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import styles from "./GreenButton2.style.module.css";
-import { useMediaQuery } from "@mui/material";
+
 interface PageProps {
   executableFunction: () => void;
   buttonText: string; //text inside the button

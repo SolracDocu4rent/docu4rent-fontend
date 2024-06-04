@@ -1,19 +1,17 @@
 "use client";
-import Image from "next/image";
 // import WhiteBackground from "./Images/Backgrounds/WhiteBackground.png";
-import HomePage from "../../Components/Home/HomePage";
-import Docu4rentNavbar from "../../Components/Reusables/Docu4rentNavbar";
-import MyInfoPageStep1 from "../../Components/MyInfo/Step1/MyInfoPageStep1";
+import Docu4rentNavbar from "@/components/reusables/Docu4rentNavbar";
+import MyInfoPageStep1 from "@/components/MyInfo/Step1/MyInfoPageStep1";
 import { useEffect, useState } from "react";
-import MyInfoPageStep2 from "../../Components/MyInfo/Step2/MyInfoPageStep2";
-import MyInfoPageStep3 from "../../Components/MyInfo/Step3/MyInfoPageStep3";
-import step1InputsArray from "../../Components/MyInfo/Step1/Step1InputsArray";
-import step2InputsArray from "../../Components/MyInfo/Step2/Step2InputsArray";
-import step3InputsArray from "../../Components/MyInfo/Step3/Step3InputsArray";
-import SelectPaymentStep from "../../Components/MyInfo/Step4-SelectPayment/SelectPaymentStep";
-import OutdatedDataStep from "../../Components/MyInfo/Payments/OutdatedDataStep";
-import FailedPaymentStep from "../../Components/MyInfo/Payments/FailedPaymentStep";
-import SuccessfulPaymentStep from "../../Components/MyInfo/Payments/SuccessfulPaymentStep";
+import MyInfoPageStep2 from "@/components/MyInfo/Step2/MyInfoPageStep2";
+import MyInfoPageStep3 from "@/components/MyInfo/Step3/MyInfoPageStep3";
+import step1InputsArray from "@/components/MyInfo/Step1/Step1InputsArray";
+import step2InputsArray from "@/components/MyInfo/Step2/Step2InputsArray";
+import step3InputsArray from "@/components/MyInfo/Step3/Step3InputsArray";
+import SelectPaymentStep from "@/components/MyInfo/Step4-SelectPayment/SelectPaymentStep";
+import OutdatedDataStep from "@/components/MyInfo/Payments/OutdatedDataStep";
+import FailedPaymentStep from "@/components/MyInfo/Payments/FailedPaymentStep";
+import SuccessfulPaymentStep from "@/components/MyInfo/Payments/SuccessfulPaymentStep";
 
 export default function MyInfoPage() {
   const [step, setStep] = useState(1);

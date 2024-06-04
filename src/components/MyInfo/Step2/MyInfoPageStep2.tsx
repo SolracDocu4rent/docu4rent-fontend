@@ -1,10 +1,8 @@
-import RoundedButton from "../../Reusables/RoundedButton";
+import RoundedButton from "@/components/reusables/RoundedButton";
 import { useState } from "react";
-import { GoogleIcon } from "@/app/Images/Icons/GoogleIcon";
-import { Box, TextField } from "@mui/material";
-import { StandardInput } from "../../Reusables/StandardInput";
-import { StandardCombobox } from "../../Reusables/StandardCombobox";
-import { StandardDownloadInput } from "../../Reusables/StandardDownloadInput";
+import { StandardInput } from "@/components/reusables/StandardInput";
+import { StandardCombobox } from "@/components/reusables/StandardCombobox";
+import { StandardDownloadInput } from "@/components/reusables/StandardDownloadInput";
 
 interface ComponentProps {
   step2InputsArrayState: any;

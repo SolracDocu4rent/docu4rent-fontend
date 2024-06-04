@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 //import SiacaLogo from "../../../images/logos/siacaLogo.png";
-import Image from "next/image";
 import { useRouter } from "next/navigation";
 import PersonOutlineRoundedIcon from "@mui/icons-material/PersonOutlineRounded";
 import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
