@@ -21,6 +21,7 @@ export default function MyInfoPageStep1({
 }: ComponentProps) {
   const [email, setEmail] = useState("");
   const [disabledState, setdisabledState] = useState(false);
+  const [showPostulateGuarantor, setshowPostulateGuarantor] = useState(false);
 
   const setValueInArray = (inputValue: string, arrayPosition: number) => {
     let auxiliaryArray = step1InputsArrayState;
@@ -48,8 +49,8 @@ export default function MyInfoPageStep1({
     } else if (step1InputsArrayState[3].input_value === "") {
       setdisabledState(true);
     } else if (
-      step1InputsArrayState[4].first_input?.input_value === "" ||
-      step1InputsArrayState[4].second_input?.input_value === ""
+      step1InputsArrayState[4].first_input?.input_value === ""
+      // || step1InputsArrayState[4].second_input?.input_value === ""
     ) {
       setdisabledState(true);
     } else if (step1InputsArrayState[5].input_value === "") {
@@ -62,6 +63,7 @@ export default function MyInfoPageStep1({
   const arrayPrinterOfInputs = () => {
     let y: any = [];
     let cont = 0;
+    console.log("step1InputsArrayState", step1InputsArrayState);
     step1InputsArrayState.map((index: any) => {
       y[cont] = (
         <div
@@ -106,6 +108,11 @@ export default function MyInfoPageStep1({
                   let auxiliaryArray = step1InputsArrayState;
                   auxiliaryArray[index.input_id].first_input.input_value =
                     value;
+                  if (value === "Si" && index?.key === "4") {
+                    setshowPostulateGuarantor(true);
+                  } else if (index?.key === "4") {
+                    setshowPostulateGuarantor(false);
+                  }
                   setstep1InputsArrayState(auxiliaryArray);
                   getDisabledNextButton();
                 }}
@@ -115,19 +122,22 @@ export default function MyInfoPageStep1({
                 label={index.first_input.input_label}
                 defaultValue={index.first_input.input_value}
               />
-              <StandardInput
-                upperText={" "}
-                setValueInArray={(value: string, position: number) => {
-                  let auxiliaryArray = step1InputsArrayState;
-                  auxiliaryArray[index.input_id].second_input.input_value =
-                    value;
-                  setstep1InputsArrayState(auxiliaryArray);
-                  getDisabledNextButton();
-                }}
-                arrayPosition={index.second_input.input_id}
-                label={index.second_input.input_label}
-                defaultValue={index.second_input.input_value}
-              />
+              {showPostulateGuarantor && (
+                <StandardInput
+                  upperText={" "}
+                  setValueInArray={(value: string, position: number) => {
+                    let auxiliaryArray = step1InputsArrayState;
+                    auxiliaryArray[index.input_id].second_input.input_value =
+                      value;
+
+                    setstep1InputsArrayState(auxiliaryArray);
+                    getDisabledNextButton();
+                  }}
+                  arrayPosition={index.second_input.input_id}
+                  label={index.second_input.input_label}
+                  defaultValue={index.second_input.input_value}
+                />
+              )}
             </div>
           ) : (
             <>Cargando...</>
