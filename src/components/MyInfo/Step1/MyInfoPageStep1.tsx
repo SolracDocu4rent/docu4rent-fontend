@@ -79,6 +79,7 @@ export default function MyInfoPageStep1({
               arrayPosition={index.input_id}
               label={index?.input_label}
               defaultValue={index.input_value}
+              isEmail={index.is_email}
             />
           ) : index?.input_type === 1 ? (
             <StandardCombobox

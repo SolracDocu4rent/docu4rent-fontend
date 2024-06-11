@@ -10,6 +10,7 @@ let step1InputsArray: {
   second_input: any; //only for double inputs questions
   is_company: boolean; //if true show for companies, if false dont show for companies
   is_person: boolean; //if true show for natural persons, if false dont show for natural persons
+  is_email: boolean;
 }[] = [
   {
     key: "0",
@@ -24,6 +25,7 @@ let step1InputsArray: {
     second_input: {},
     is_company: true,
     is_person: true,
+    is_email: false,
   },
   {
     key: "1",
@@ -37,6 +39,7 @@ let step1InputsArray: {
     second_input: {},
     is_company: true,
     is_person: true,
+    is_email: true,
   },
   {
     key: "2",
@@ -50,6 +53,7 @@ let step1InputsArray: {
     second_input: {},
     is_company: true,
     is_person: true,
+    is_email: false,
   },
   {
     key: "3",
@@ -63,6 +67,7 @@ let step1InputsArray: {
     second_input: {},
     is_company: true,
     is_person: true,
+    is_email: false,
   },
   {
     key: "4",
@@ -91,6 +96,7 @@ let step1InputsArray: {
     },
     is_company: true,
     is_person: true,
+    is_email: false,
   },
   {
     key: "5",
@@ -104,6 +110,7 @@ let step1InputsArray: {
     second_input: {},
     is_company: true,
     is_person: true,
+    is_email: false,
   },
 ];
 
