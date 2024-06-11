@@ -1,7 +1,7 @@
 let step2InputsArray: {
   key: string;
   input_id: number;
-  input_type: number; //0== textfield, 1 == combobox, 2==upload ,  3 == double input(combobox + textfield)
+  input_type: number; //0== textfield, 1 == combobox, 2==upload ,  3 == double input(combobox + textfield), 7 == RUT
   upper_text: string;
   options: string[]; //only combobox has options. Textfield will be an empty array
   input_value: string;
@@ -92,7 +92,7 @@ let step2InputsArray: {
   {
     key: "16",
     input_id: 6,
-    input_type: 0, //0== textfield, 1 == combobox, 2==upload
+    input_type: 7, //0== textfield, 1 == combobox, 2==upload, 7 ===RUT
     upper_text: "RUT",
     options: [],
     input_value: "",
@@ -105,7 +105,7 @@ let step2InputsArray: {
   {
     key: "17",
     input_id: 7,
-    input_type: 0, //0== textfield, 1 == combobox, 2==upload
+    input_type: 7, //0== textfield, 1 == combobox, 2==upload
     upper_text: "RUT Representante legal",
     options: [],
     input_value: "",
@@ -137,7 +137,7 @@ let step2InputsArray: {
   {
     key: "19",
     input_id: 9,
-    input_type: 0, //0== textfield, 1 == combobox, 2==upload
+    input_type: 7, //0== textfield, 1 == combobox, 2==upload
     upper_text: "RUT Empresa",
     options: [],
     input_value: "",
@@ -380,7 +380,6 @@ let step2InputsArray: {
       "Pucón",
       "Pudahuel",
       "Puente Alto",
-      "Puente Alto",
       "Puerto Montt",
       "Puerto Octay",
       "Puerto Varas",
@@ -491,7 +490,6 @@ let step2InputsArray: {
       "Yumbel",
       "Yungay",
       "Zapallar",
-      "Ñuñoa",
     ],
     input_value: "",
     input_label: "Las condes",
