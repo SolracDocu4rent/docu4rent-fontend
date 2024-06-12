@@ -4,14 +4,16 @@ import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
 import NotificationsNoneRoundedIcon from "@mui/icons-material/NotificationsNoneRounded";
 import { useRouter } from "next/navigation";
 
-interface mock  {
+interface mock {
   key: number;
   name: string;
   status: string;
 }
 export default function HomePage() {
   const [email, setEmail] = useState("");
-  const [arrayOfNotifications, setarrayOfNotifications] = useState<Array<mock>>([]);
+  const [arrayOfNotifications, setarrayOfNotifications] = useState<Array<mock>>(
+    []
+  );
   const router = useRouter();
   let mockdata = [
     { key: 1, name: "nombre1nombre1nombre1nombre1", status: "Rechazada" },
@@ -30,44 +32,52 @@ export default function HomePage() {
     //trae los datos cuando se entra a la pagina airlines
     let x: any = [];
     x.push({ key: 1, name: "nombre", status: "Rechazados" });
-    setarrayOfNotifications(mockdata);
+    //setarrayOfNotifications(mockdata); //comentar para ver los envios vacios. Descomentar para ver mock data
   }, []);
 
   const arrayPrinterOfNotifications = () => {
     let y: any = [];
     let cont = 0;
-    arrayOfNotifications.map((index: any) => {
-      let bgOfStatus =
-        index?.status === "En proceso"
-          ? " bg-[#4086c3]"
-          : index?.status === "Rechazada"
-          ? " bg-[#CF2828]"
-          : index?.status === "Aclaración"
-          ? " bg-[#FFD700]"
-          : index?.status === "Aprobada"
-          ? " bg-[#01964E]"
-          : " bg-[#BBBBBB]";
-      cont++;
-      y[cont] = (
-        <div
-          key={index?.key}
-          className="flex flex-row justify-between items-center hover:bg-[#EBEBEB] rounded-lg"
-        >
-          <div className="flex flex-row items-center gap-3">
-            <NotificationsNoneRoundedIcon htmlColor="#121212" />
-            <p className="font-medium">{index?.name}</p>
-          </div>
-          <div
-            className={
-              " text-white h-[28px] w-[150px] flex justify-center items-center rounded-full" +
-              bgOfStatus
-            }
-          >
-            <p>{index?.status}</p>
-          </div>
+    if (arrayOfNotifications.length === 0) {
+      y[0] = (
+        <div className="flex flex-row justify-center py-5 text-[20px] text-[lightgray] font-medium">
+          Aquí aparecerán tus envíos en curso...
         </div>
       );
-    });
+    } else {
+      arrayOfNotifications.map((index: any) => {
+        let bgOfStatus =
+          index?.status === "En proceso"
+            ? " bg-[#4086c3]"
+            : index?.status === "Rechazada"
+            ? " bg-[#CF2828]"
+            : index?.status === "Aclaración"
+            ? " bg-[#FFD700]"
+            : index?.status === "Aprobada"
+            ? " bg-[#01964E]"
+            : " bg-[#BBBBBB]";
+        cont++;
+        y[cont] = (
+          <div
+            key={index?.key}
+            className="flex flex-row justify-between items-center hover:bg-[#EBEBEB] rounded-lg"
+          >
+            <div className="flex flex-row items-center gap-3">
+              <NotificationsNoneRoundedIcon htmlColor="#121212" />
+              <p className="font-medium">{index?.name}</p>
+            </div>
+            <div
+              className={
+                " text-white h-[28px] w-[150px] flex justify-center items-center rounded-full" +
+                bgOfStatus
+              }
+            >
+              <p>{index?.status}</p>
+            </div>
+          </div>
+        );
+      });
+    }
 
     return y;
   };

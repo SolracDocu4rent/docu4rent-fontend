@@ -3,6 +3,16 @@ import { useState } from "react";
 import { StandardInput } from "@/components/reusables/StandardInput";
 import { StandardCombobox } from "@/components/reusables/StandardCombobox";
 import { StandardDownloadInput } from "@/components/reusables/StandardDownloadInput";
+import {
+  cleanParts,
+  calculate,
+  verifier,
+  validate,
+  format,
+  digits,
+  clean,
+} from "@validatecl/rut";
+import { StandardInputRUT } from "@/components/reusables/StandardInputRUT";
 
 interface ComponentProps {
   step2InputsArrayState: any;
@@ -30,7 +40,7 @@ export default function MyInfoPageStep3({
     let auxiliaryArray = step2InputsArrayState;
     auxiliaryArray[arrayPosition].input_value = inputValue;
     setstep2InputsArrayState(auxiliaryArray);
-    console.log(step2InputsArrayState);
+    //console.log(step2InputsArrayState);
   };
 
   const arrayPrinterOfInputs = () => {
@@ -85,7 +95,7 @@ export default function MyInfoPageStep3({
                     auxiliaryArray[index.input_id].first_input.input_value =
                       value;
                     setstep2InputsArrayState(auxiliaryArray);
-                    console.log(step2InputsArrayState);
+                    //console.log(step2InputsArrayState);
                   }}
                   arrayPosition={index.first_input.input_id}
                   upperText={index.upper_text}
@@ -100,13 +110,23 @@ export default function MyInfoPageStep3({
                     auxiliaryArray[index.input_id].second_input.input_value =
                       value;
                     setstep2InputsArrayState(auxiliaryArray);
-                    console.log(step2InputsArrayState);
+                    //console.log(step2InputsArrayState);
                   }}
                   arrayPosition={index.second_input.input_id}
                   label={index.second_input.input_label}
                   defaultValue={index.second_input.input_value}
                 />
               </div>
+            ) : index?.input_type === 7 ? (
+              <StandardInputRUT
+                upperText={index.upper_text}
+                setValueInArray={(value: string, position: number) => {
+                  setValueInArray(value, index.input_id);
+                }}
+                arrayPosition={index.input_id}
+                label={index?.input_label}
+                defaultValue={index.input_value}
+              />
             ) : (
               <>Cargando...</>
             )}
