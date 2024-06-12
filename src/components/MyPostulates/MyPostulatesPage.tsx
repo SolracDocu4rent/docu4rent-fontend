@@ -343,7 +343,7 @@ export default function MyPostulatesPage() {
               docu4rent
             </p>
           </div>
-          <div className="bg-[url(Images/Backgrounds/ArrayOf4sBackground.png)] bg-opacity-25 mt-3 py-3 pl-3">
+          <div className="bg-[url(images/Backgrounds/ArrayOf4sBackground.png)] bg-opacity-25 mt-3 py-3 pl-3">
             <p className="text-[#466197] font-bold text-[20px]">Indicadores</p>
             <div className="flex flex-row justify-around py-5 ">
               <div className="max-w-[25%] border-[2px] border-[#BBBBB] shadow-md py-5 px-3 rounded-2xl flex flex-col gap-3 bg-[#FFFFFF]">
