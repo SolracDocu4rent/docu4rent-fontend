@@ -15,6 +15,7 @@ import SuccessfulPaymentStep from "@/components/MyInfo/Payments/SuccessfulPaymen
 
 export default function MyInfoPage() {
   const [step, setStep] = useState(1);
+  const [applicationId, setApplicationId] = useState('');
   const [isCompany, setisCompany] = useState(true);
   const [isPerson, setisPerson] = useState(false);
   const [isDependantPerson, setIsDependantPerson] = useState(false);
@@ -39,6 +40,7 @@ export default function MyInfoPage() {
           step1InputsArrayState={step1InputsArrayState}
           setstep1InputsArrayState={setstep1InputsArrayState}
           setStep={setStep}
+          setApplicationId={setApplicationId}
           setisCompany={setisCompany}
           setisPerson={setisPerson}
         />
@@ -48,6 +50,7 @@ export default function MyInfoPage() {
           step2InputsArrayState={step2InputsArrayState}
           setstep2InputsArrayState={setstep2InputsArrayState}
           setStep={setStep}
+          applicationId={applicationId}
           isCompany={isCompany}
           isPerson={isPerson}
           setIsDependantPerson={setIsDependantPerson}

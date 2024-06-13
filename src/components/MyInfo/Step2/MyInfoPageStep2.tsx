@@ -13,11 +13,33 @@ import {
   clean,
 } from "@validatecl/rut";
 import { StandardInputRUT } from "@/components/reusables/StandardInputRUT";
+import firebaseServiceInstance from "@/services/firebase.service";
+
+function groupCompanyFields(data: SaveData) {
+  const companyData: SaveData = {};
+  const userData: SaveData = {};
+
+  for (const key in data) {
+    if (data.hasOwnProperty(key)) {
+      if (key.startsWith('Company_')) {
+        const newKey = key.replace('Company_', '');
+        companyData[newKey] = data[key];
+      } else {
+        userData[key] = data[key];
+      }
+    }
+  }
+  if (Object.keys(companyData).length > 0) {
+    userData['company'] = companyData;
+  }
+  return userData;
+}
 
 interface ComponentProps {
   step2InputsArrayState: any;
   setstep2InputsArrayState: (value: any) => void;
   setStep: (value: number) => void;
+  applicationId: string;
   isCompany: boolean;
   isPerson: boolean;
   setIsDependantPerson: (value: boolean) => void;
@@ -28,6 +50,7 @@ export default function MyInfoPageStep3({
   step2InputsArrayState,
   setstep2InputsArrayState,
   setStep,
+  applicationId,
   isCompany,
   isPerson,
   setIsDependantPerson,
@@ -41,6 +64,32 @@ export default function MyInfoPageStep3({
     auxiliaryArray[arrayPosition].input_value = inputValue;
     setstep2InputsArrayState(auxiliaryArray);
     //console.log(step2InputsArrayState);
+  };
+
+  const nextStep = async () => {
+    if (step2InputsArrayState[15].input_value === "Dependiente") {
+      setIsDependantPerson(true);
+      setIsIndependantPerson(false);
+    } else {
+      setIsDependantPerson(false);
+      setIsIndependantPerson(true);
+    }
+    console.log('applicationID', applicationId)
+    if (applicationId != '') {
+      try {
+        let data: SaveData = { applicationId }
+        step2InputsArrayState.forEach((element: step2InputInterface) => {
+          data[element.db_key] = element.input_value
+        });
+        data = groupCompanyFields(data)
+        const documentId = await firebaseServiceInstance.saveFirebaseDocument('applicationData', data);
+        setStep(3);
+      } catch (error) {
+        console.error('Error al obtener datos de usuario:', error);
+      }
+    } else {
+      console.log('No hay usuario autenticado');
+    }
   };
 
   const arrayPrinterOfInputs = () => {
@@ -164,16 +213,7 @@ export default function MyInfoPageStep3({
             standardSize={false}
           />
           <RoundedButton
-            executableFunction={() => {
-              if (step2InputsArrayState[15].input_value === "Dependiente") {
-                setIsDependantPerson(true);
-                setIsIndependantPerson(false);
-              } else {
-                setIsDependantPerson(false);
-                setIsIndependantPerson(true);
-              }
-              setStep(3);
-            }}
+            executableFunction={() => nextStep()}
             buttonText="Siguiente"
             rounded
             shadow

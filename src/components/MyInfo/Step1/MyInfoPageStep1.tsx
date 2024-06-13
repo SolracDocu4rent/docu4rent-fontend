@@ -8,6 +8,7 @@ import { auth } from "@/firebase/firebase";
 
 interface ComponentProps {
   step1InputsArrayState: any;
+  setApplicationId: (value: any) => void;
   setstep1InputsArrayState: (value: any) => void;
   setStep: (value: number) => void;
   setisCompany: (value: boolean) => void;
@@ -16,6 +17,7 @@ interface ComponentProps {
 
 export default function MyInfoPageStep1({
   step1InputsArrayState,
+  setApplicationId,
   setstep1InputsArrayState,
   setStep,
   setisPerson,
@@ -76,18 +78,15 @@ export default function MyInfoPageStep1({
         step1InputsArrayState.forEach((element: step1InputInterface) => {
           data[element.db_key] = element.input_value
         });
-        const response = await firebaseServiceInstance.saveFirebaseDocument('applications', data);
-        console.log('response: ', response)
+        const applicationId = await firebaseServiceInstance.saveFirebaseDocument('applications', data);
+        setApplicationId(applicationId);
+        setStep(2);
       } catch (error) {
         console.error('Error al obtener datos de usuario:', error);
       }
     } else {
       console.log('No hay usuario autenticado');
     }
-
-
-    
-    //setStep(2);
   };
 
   const arrayPrinterOfInputs = () => {
