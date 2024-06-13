@@ -1,4 +1,4 @@
-import { DocumentData, collection, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore";
+import { DocumentData, Timestamp, collection, doc, getDoc, getDocs, query, setDoc, updateDoc, where } from "firebase/firestore";
 import { httpsCallable } from "firebase/functions";
 import { ref, getDownloadURL } from "firebase/storage";
 
@@ -27,7 +27,7 @@ class FirebaseService {
       throw new Error('No hay usuario autenticado');
     }
   }
-  
+
   async getUserToken(): Promise<string | undefined> {
     const currentUser = auth.currentUser;
     return await currentUser?.getIdToken();
@@ -36,6 +36,18 @@ class FirebaseService {
   async callCloudFunction(functionName: string, data?: any) {
     const functionCall = httpsCallable(fbFunctions, functionName);
     return functionCall();
+  }
+
+  async saveFirebaseDocument(collectionName: string, data: any) {
+    try {
+      data = { createdAt: Timestamp.now(), ...data }
+      const docRef = doc(collection(firestore, collectionName));
+      await setDoc(docRef, data);
+      return docRef.id;
+    } catch (error) {
+      console.error('Error al obtener datos de usuario:', error);
+      throw new Error('Error al obtener datos de usuario');
+    }
   }
 }
 

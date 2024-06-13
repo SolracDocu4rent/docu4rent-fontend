@@ -1,19 +1,7 @@
-let step1InputsArray: {
-  key: string;
-  input_id: number;
-  input_type: number; //0== textfield, 1 == combobox, 2==upload ,  3 == double input(combobox + textfield)
-  upper_text: string;
-  options: string[]; //only combobox has options. Textfield will be an empty array
-  input_value: string;
-  input_label: string; //gray text insidde input
-  first_input: any; //only for double inputs questions
-  second_input: any; //only for double inputs questions
-  is_company: boolean; //if true show for companies, if false dont show for companies
-  is_person: boolean; //if true show for natural persons, if false dont show for natural persons
-  is_email: boolean;
-}[] = [
+let step1InputsArray: step1InputInterface[] = [
   {
     key: "0",
+    db_key: "broker",
     input_id: 0,
     input_type: 0, //0== textfield, 1 == combobox, 2==upload
     upper_text:
@@ -29,6 +17,7 @@ let step1InputsArray: {
   },
   {
     key: "1",
+    db_key: "brokerEmail",
     input_id: 1,
     input_type: 0, //0== textfield, 1 == combobox, 2==upload
     upper_text: "Correo al cual se envía el link de acceso",
@@ -43,6 +32,7 @@ let step1InputsArray: {
   },
   {
     key: "2",
+    db_key: "linkTime",
     input_id: 2,
     input_type: 1, //0== textfield, 1 == combobox, 2==upload
     upper_text: "Plazo para acceder a la información",
@@ -57,6 +47,7 @@ let step1InputsArray: {
   },
   {
     key: "3",
+    db_key: "needCosigner",
     input_id: 3,
     input_type: 1, //0== textfield, 1 == combobox, 2==upload
     upper_text: "¿Necesitarás aval?",
@@ -71,6 +62,7 @@ let step1InputsArray: {
   },
   {
     key: "4",
+    db_key: "isCosigner",
     input_id: 4,
     input_type: 3, //0== textfield, 1 == combobox, 2==upload
     upper_text: "¿Eres aval de otra postulación?",
@@ -87,6 +79,7 @@ let step1InputsArray: {
     },
     second_input: {
       key: "105",
+      db_key: "cosignerApplicationId",
       input_id: 105,
       input_type: 1, //0== textfield, 1 == combobox, 2==upload
       upper_text: "",
@@ -100,6 +93,7 @@ let step1InputsArray: {
   },
   {
     key: "5",
+    db_key: "type",
     input_id: 5,
     input_type: 1, //0== textfield, 1 == combobox, 2==upload
     upper_text: "Postulas como",

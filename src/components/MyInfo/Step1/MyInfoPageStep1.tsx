@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { StandardInput } from "@/components/reusables/StandardInput";
 import { StandardCombobox } from "@/components/reusables/StandardCombobox";
 import { StandardDownloadInput } from "@/components/reusables/StandardDownloadInput";
+import firebaseServiceInstance from "@/services/firebase.service";
+import { auth } from "@/firebase/firebase";
 
 interface ComponentProps {
   step1InputsArrayState: any;
@@ -31,7 +33,6 @@ export default function MyInfoPageStep1({
   };
 
   useEffect(() => {
-    console.log("step1InputsArrayState", step1InputsArrayState);
     if (step1InputsArrayState?.lenght > 1) {
       getDisabledNextButton();
     } else {
@@ -58,6 +59,35 @@ export default function MyInfoPageStep1({
     } else {
       setdisabledState(false);
     }
+  };
+
+  const nextStep = async () => {
+    if (step1InputsArrayState[5].input_value === "Empresa") {
+      setisCompany(true);
+      setisPerson(false);
+    } else {
+      setisCompany(false);
+      setisPerson(true);
+    }
+    const currentUser = auth.currentUser;
+    if (currentUser) {
+      try {
+        let data: SaveData = {userId: currentUser.uid}
+        step1InputsArrayState.forEach((element: step1InputInterface) => {
+          data[element.db_key] = element.input_value
+        });
+        const response = await firebaseServiceInstance.saveFirebaseDocument('applications', data);
+        console.log('response: ', response)
+      } catch (error) {
+        console.error('Error al obtener datos de usuario:', error);
+      }
+    } else {
+      console.log('No hay usuario autenticado');
+    }
+
+
+    
+    //setStep(2);
   };
 
   const arrayPrinterOfInputs = () => {
@@ -176,16 +206,7 @@ export default function MyInfoPageStep1({
             standardSize={false}
           /> */}
           <RoundedButton
-            executableFunction={() => {
-              if (step1InputsArrayState[5].input_value === "Empresa") {
-                setisCompany(true);
-                setisPerson(false);
-              } else {
-                setisCompany(false);
-                setisPerson(true);
-              }
-              setStep(2);
-            }}
+            executableFunction={() => nextStep()}
             buttonText="Siguiente"
             rounded
             shadow
