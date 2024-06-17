@@ -156,7 +156,7 @@ export default function MyInfoPageStep1({
                 upperText={index.upper_text}
                 options={index.first_input.options}
                 label={index.first_input.input_label}
-                defaultValue={index.first_input.input_value}
+                defaultValue={index.first_input.input_value ? "Si" : "No"}
               />
               {showPostulateGuarantor && (
                 <StandardInput
@@ -195,7 +195,7 @@ export default function MyInfoPageStep1({
                 upperText={index.upper_text}
                 options={index.options}
                 label={index.input_label}
-                defaultValue={index.input_value}
+                defaultValue={index.input_value ? "Si" : "No"}
               />
             </div>
           ) : (
