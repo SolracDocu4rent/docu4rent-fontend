@@ -61,6 +61,11 @@ export default function MyInfoPageStep1({
       // || step1InputsArrayState[4].second_input?.input_value === ""
     ) {
       setDisabledState(true);
+    } else if (
+      step1InputsArrayState[4].second_input?.input_value === "" &&
+      step1InputsArrayState[4].first_input?.input_value === true
+    ) {
+      setDisabledState(true);
     } else if (step1InputsArrayState[5].input_value === "") {
       setDisabledState(true);
     } else {
@@ -156,6 +161,7 @@ export default function MyInfoPageStep1({
                   }
                   setStep1InputsArrayState(auxiliaryArray);
                   getDisabledNextButton();
+                  console.log(auxiliaryArray);
                 }}
                 arrayPosition={index.first_input.input_id}
                 upperText={index.upper_text}
@@ -176,7 +182,7 @@ export default function MyInfoPageStep1({
                     let auxiliaryArray = step1InputsArrayState;
                     auxiliaryArray[index.input_id].second_input.input_value =
                       value;
-
+                    console.log(auxiliaryArray);
                     setStep1InputsArrayState(auxiliaryArray);
                     getDisabledNextButton();
                   }}
