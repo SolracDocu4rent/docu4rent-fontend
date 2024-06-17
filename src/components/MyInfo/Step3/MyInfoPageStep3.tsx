@@ -6,7 +6,7 @@ import { StandardDownloadInput } from "@/components/reusables/StandardDownloadIn
 
 interface ComponentProps {
   step3InputsArrayState: any;
-  setstep3InputsArrayState: (value: any) => void;
+  setStep3InputsArrayState: (value: any) => void;
   setStep: (value: number) => void;
   isDependantPerson: boolean;
   isIndependantPerson: boolean;
@@ -16,7 +16,7 @@ interface ComponentProps {
 
 export default function MyInfoPageStep3({
   step3InputsArrayState,
-  setstep3InputsArrayState,
+  setStep3InputsArrayState,
   setStep,
   isDependantPerson,
   isIndependantPerson,
@@ -29,7 +29,7 @@ export default function MyInfoPageStep3({
   const setValueInArray = (inputValue: string, arrayPosition: number) => {
     let auxiliaryArray = step3InputsArrayState;
     auxiliaryArray[arrayPosition].input_value = inputValue;
-    setstep3InputsArrayState(auxiliaryArray);
+    setStep3InputsArrayState(auxiliaryArray);
     console.log(step3InputsArrayState);
   };
 
@@ -89,7 +89,7 @@ export default function MyInfoPageStep3({
                     let auxiliaryArray = step3InputsArrayState;
                     auxiliaryArray[index.input_id].first_input.input_value =
                       value;
-                    setstep3InputsArrayState(auxiliaryArray);
+                    setStep3InputsArrayState(auxiliaryArray);
                     console.log(step3InputsArrayState);
                   }}
                   arrayPosition={index.first_input.input_id}
@@ -104,7 +104,7 @@ export default function MyInfoPageStep3({
                     let auxiliaryArray = step3InputsArrayState;
                     auxiliaryArray[index.input_id].second_input.input_value =
                       value;
-                    setstep3InputsArrayState(auxiliaryArray);
+                    setStep3InputsArrayState(auxiliaryArray);
                     console.log(step3InputsArrayState);
                   }}
                   arrayPosition={index.second_input.input_id}
@@ -289,7 +289,7 @@ export default function MyInfoPageStep3({
                     let auxiliaryArray = step3InputsArrayState;
                     auxiliaryArray[index.input_id].first_input.input_value =
                       value;
-                    setstep3InputsArrayState(auxiliaryArray);
+                    setStep3InputsArrayState(auxiliaryArray);
                     console.log(step3InputsArrayState);
                   }}
                   arrayPosition={index.first_input.input_id}
@@ -304,7 +304,7 @@ export default function MyInfoPageStep3({
                     let auxiliaryArray = step3InputsArrayState;
                     auxiliaryArray[index.input_id].second_input.input_value =
                       value;
-                    setstep3InputsArrayState(auxiliaryArray);
+                    setStep3InputsArrayState(auxiliaryArray);
                     console.log(step3InputsArrayState);
                   }}
                   arrayPosition={index.second_input.input_id}

@@ -9,28 +9,28 @@ import { auth } from "@/firebase/firebase";
 interface ComponentProps {
   step1InputsArrayState: any;
   setApplicationId: (value: any) => void;
-  setstep1InputsArrayState: (value: any) => void;
+  setStep1InputsArrayState: (value: any) => void;
   setStep: (value: number) => void;
-  setisCompany: (value: boolean) => void;
-  setisPerson: (value: boolean) => void;
+  setIsCompany: (value: boolean) => void;
+  setIsPerson: (value: boolean) => void;
 }
 
 export default function MyInfoPageStep1({
   step1InputsArrayState,
   setApplicationId,
-  setstep1InputsArrayState,
+  setStep1InputsArrayState,
   setStep,
-  setisPerson,
-  setisCompany,
+  setIsPerson,
+  setIsCompany,
 }: ComponentProps) {
   const [email, setEmail] = useState("");
-  const [disabledState, setdisabledState] = useState(false);
-  const [showPostulateGuarantor, setshowPostulateGuarantor] = useState(false);
+  const [disabledState, setDisabledState] = useState(false);
+  const [showPostulateGuarantor, setShowPostulateGuarantor] = useState(false);
 
   const setValueInArray = (inputValue: string, arrayPosition: number) => {
     let auxiliaryArray = step1InputsArrayState;
     auxiliaryArray[arrayPosition].input_value = inputValue;
-    setstep1InputsArrayState(auxiliaryArray);
+    setStep1InputsArrayState(auxiliaryArray);
     getDisabledNextButton();
   };
 
@@ -38,38 +38,38 @@ export default function MyInfoPageStep1({
     if (step1InputsArrayState?.lenght > 1) {
       getDisabledNextButton();
     } else {
-      setdisabledState(true);
+      setDisabledState(true);
     }
   }, []);
 
   const getDisabledNextButton = () => {
     if (step1InputsArrayState[0].input_value === "") {
-      setdisabledState(true);
+      setDisabledState(true);
     } else if (step1InputsArrayState[1].input_value === "") {
-      setdisabledState(true);
+      setDisabledState(true);
     } else if (step1InputsArrayState[2].input_value === "") {
-      setdisabledState(true);
+      setDisabledState(true);
     } else if (step1InputsArrayState[3].input_value === "") {
-      setdisabledState(true);
+      setDisabledState(true);
     } else if (
       step1InputsArrayState[4].first_input?.input_value === ""
       // || step1InputsArrayState[4].second_input?.input_value === ""
     ) {
-      setdisabledState(true);
+      setDisabledState(true);
     } else if (step1InputsArrayState[5].input_value === "") {
-      setdisabledState(true);
+      setDisabledState(true);
     } else {
-      setdisabledState(false);
+      setDisabledState(false);
     }
   };
 
   const nextStep = async () => {
     if (step1InputsArrayState[5].input_value === "Empresa") {
-      setisCompany(true);
-      setisPerson(false);
+      setIsCompany(true);
+      setIsPerson(false);
     } else {
-      setisCompany(false);
-      setisPerson(true);
+      setIsCompany(false);
+      setIsPerson(true);
     }
     const currentUser = auth.currentUser;
     if (currentUser) {
@@ -143,13 +143,13 @@ export default function MyInfoPageStep1({
                   if (value === "Si" && index?.key === "4") {
                     auxiliaryArray[index.input_id].first_input.input_value =
                       true;
-                    setshowPostulateGuarantor(true);
+                    setShowPostulateGuarantor(true);
                   } else if (index?.key === "4") {
-                    setshowPostulateGuarantor(false);
+                    setShowPostulateGuarantor(false);
                     auxiliaryArray[index.input_id].first_input.input_value =
                       false;
                   }
-                  setstep1InputsArrayState(auxiliaryArray);
+                  setStep1InputsArrayState(auxiliaryArray);
                   getDisabledNextButton();
                 }}
                 arrayPosition={index.first_input.input_id}
@@ -166,7 +166,7 @@ export default function MyInfoPageStep1({
                     auxiliaryArray[index.input_id].second_input.input_value =
                       value;
 
-                    setstep1InputsArrayState(auxiliaryArray);
+                    setStep1InputsArrayState(auxiliaryArray);
                     getDisabledNextButton();
                   }}
                   arrayPosition={index.second_input.input_id}
@@ -183,12 +183,12 @@ export default function MyInfoPageStep1({
 
                   if (value === "Si") {
                     auxiliaryArray[index.input_id].input_value = true;
-                    setshowPostulateGuarantor(true);
+                    setShowPostulateGuarantor(true);
                   } else {
-                    setshowPostulateGuarantor(false);
+                    setShowPostulateGuarantor(false);
                     auxiliaryArray[index.input_id].input_value = false;
                   }
-                  setstep1InputsArrayState(auxiliaryArray);
+                  setStep1InputsArrayState(auxiliaryArray);
                   getDisabledNextButton();
                 }}
                 arrayPosition={index.input_id}

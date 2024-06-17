@@ -15,19 +15,19 @@ import SuccessfulPaymentStep from "@/components/MyInfo/Payments/SuccessfulPaymen
 
 export default function MyInfoPage() {
   const [step, setStep] = useState(1);
-  const [applicationId, setApplicationId] = useState('');
-  const [isCompany, setisCompany] = useState(true);
-  const [isPerson, setisPerson] = useState(false);
+  const [applicationId, setApplicationId] = useState("");
+  const [isCompany, setIsCompany] = useState(true);
+  const [isPerson, setIsPerson] = useState(false);
   const [isDependantPerson, setIsDependantPerson] = useState(false);
   const [isIndependantPerson, setIsIndependantPerson] = useState(false);
-  const [step1InputsArrayState, setstep1InputsArrayState] = useState([{}]);
-  const [step2InputsArrayState, setstep2InputsArrayState] = useState([{}]);
-  const [step3InputsArrayState, setstep3InputsArrayState] = useState([{}]);
+  const [step1InputsArrayState, setStep1InputsArrayState] = useState([{}]);
+  const [step2InputsArrayState, setStep2InputsArrayState] = useState([{}]);
+  const [step3InputsArrayState, setStep3InputsArrayState] = useState([{}]);
   useEffect(() => {
     //trae los datos cuando se entra a la pagina airlines
-    setstep1InputsArrayState(step1InputsArray);
-    setstep2InputsArrayState(step2InputsArray);
-    setstep3InputsArrayState(step3InputsArray);
+    setStep1InputsArrayState(step1InputsArray);
+    setStep2InputsArrayState(step2InputsArray);
+    setStep3InputsArrayState(step3InputsArray);
   }, []);
 
   return (
@@ -38,17 +38,17 @@ export default function MyInfoPage() {
       {step === 1 && (
         <MyInfoPageStep1
           step1InputsArrayState={step1InputsArrayState}
-          setstep1InputsArrayState={setstep1InputsArrayState}
+          setStep1InputsArrayState={setStep1InputsArrayState}
           setStep={setStep}
           setApplicationId={setApplicationId}
-          setisCompany={setisCompany}
-          setisPerson={setisPerson}
+          setIsCompany={setIsCompany}
+          setIsPerson={setIsPerson}
         />
       )}
       {step === 2 && (
         <MyInfoPageStep2
           step2InputsArrayState={step2InputsArrayState}
-          setstep2InputsArrayState={setstep2InputsArrayState}
+          setStep2InputsArrayState={setStep2InputsArrayState}
           setStep={setStep}
           applicationId={applicationId}
           isCompany={isCompany}
@@ -60,7 +60,7 @@ export default function MyInfoPage() {
       {step === 3 && (
         <MyInfoPageStep3
           step3InputsArrayState={step3InputsArrayState}
-          setstep3InputsArrayState={setstep3InputsArrayState}
+          setStep3InputsArrayState={setStep3InputsArrayState}
           setStep={setStep}
           isDependantPerson={isDependantPerson}
           isIndependantPerson={isIndependantPerson}

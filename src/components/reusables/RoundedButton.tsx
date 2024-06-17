@@ -27,9 +27,9 @@ const RoundedButton: React.FC<PageProps> = ({
   whiteTextColor = false,
   standardSize = true,
 }) => {
-  const [disabledState, setdisabledState] = useState(false);
+  const [disabledState, setDisabledState] = useState(false);
   useEffect(() => {
-    disabled ? setdisabledState(true) : setdisabledState(false);
+    disabled ? setDisabledState(true) : setDisabledState(false);
   }, []);
   let addRound = rounded === true ? " rounded-full " : " rounded ";
   let addBoldText = boldText === true ? " font-semibold " : "";
