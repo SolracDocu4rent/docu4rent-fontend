@@ -5,7 +5,7 @@ interface step1InputInterface {
   input_type: number; //0== textfield, 1 == combobox, 2==upload ,  3 == double input(combobox + textfield)
   upper_text: string;
   options: string[]; //only combobox has options. Textfield will be an empty array
-  input_value: string;
+  input_value: any;
   input_label: string; //gray text insidde input
   first_input: any; //only for double inputs questions
   second_input: any; //only for double inputs questions
@@ -14,7 +14,7 @@ interface step1InputInterface {
   is_email: boolean;
 }
 
-interface step2InputInterface{
+interface step2InputInterface {
   key: string;
   db_key: string;
   input_id: number;

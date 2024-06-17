@@ -74,25 +74,28 @@ export default function MyInfoPageStep1({
     const currentUser = auth.currentUser;
     if (currentUser) {
       try {
-        let data: SaveData = {userId: currentUser.uid}
+        let data: SaveData = { userId: currentUser.uid };
         step1InputsArrayState.forEach((element: step1InputInterface) => {
-          data[element.db_key] = element.input_value
+          data[element.db_key] = element.input_value;
         });
-        const applicationId = await firebaseServiceInstance.saveFirebaseDocument('applications', data);
+        const applicationId =
+          await firebaseServiceInstance.saveFirebaseDocument(
+            "applications",
+            data
+          );
         setApplicationId(applicationId);
         setStep(2);
       } catch (error) {
-        console.error('Error al obtener datos de usuario:', error);
+        console.error("Error al obtener datos de usuario:", error);
       }
     } else {
-      console.log('No hay usuario autenticado');
+      console.log("No hay usuario autenticado");
     }
   };
 
   const arrayPrinterOfInputs = () => {
     let y: any = [];
     let cont = 0;
-    console.log("step1InputsArrayState", step1InputsArrayState);
     step1InputsArrayState.map((index: any) => {
       y[cont] = (
         <div
@@ -136,12 +139,15 @@ export default function MyInfoPageStep1({
               <StandardCombobox
                 setValueInArray={(value: string, position: number) => {
                   let auxiliaryArray = step1InputsArrayState;
-                  auxiliaryArray[index.input_id].first_input.input_value =
-                    value;
+
                   if (value === "Si" && index?.key === "4") {
+                    auxiliaryArray[index.input_id].first_input.input_value =
+                      true;
                     setshowPostulateGuarantor(true);
                   } else if (index?.key === "4") {
                     setshowPostulateGuarantor(false);
+                    auxiliaryArray[index.input_id].first_input.input_value =
+                      false;
                   }
                   setstep1InputsArrayState(auxiliaryArray);
                   getDisabledNextButton();
@@ -168,6 +174,29 @@ export default function MyInfoPageStep1({
                   defaultValue={index.second_input.input_value}
                 />
               )}
+            </div>
+          ) : index?.input_type === 4 ? (
+            <div className="w-[100%] flex flex-col gap-3">
+              <StandardCombobox
+                setValueInArray={(value: string, position: number) => {
+                  let auxiliaryArray = step1InputsArrayState;
+
+                  if (value === "Si") {
+                    auxiliaryArray[index.input_id].input_value = true;
+                    setshowPostulateGuarantor(true);
+                  } else {
+                    setshowPostulateGuarantor(false);
+                    auxiliaryArray[index.input_id].input_value = false;
+                  }
+                  setstep1InputsArrayState(auxiliaryArray);
+                  getDisabledNextButton();
+                }}
+                arrayPosition={index.input_id}
+                upperText={index.upper_text}
+                options={index.options}
+                label={index.input_label}
+                defaultValue={index.input_value}
+              />
             </div>
           ) : (
             <>Cargando...</>

@@ -3,7 +3,7 @@ let step1InputsArray: step1InputInterface[] = [
     key: "0",
     db_key: "broker",
     input_id: 0,
-    input_type: 0, //0== textfield, 1 == combobox, 2==upload
+    input_type: 0, //0== textfield, 1 == combobox, 2==upload, 3== combobox and emerging textfield,4== true/false combobox
     upper_text:
       "Nombre de la corredora, empresa o persona que recibe tu información",
     options: [],
@@ -49,7 +49,7 @@ let step1InputsArray: step1InputInterface[] = [
     key: "3",
     db_key: "needCosigner",
     input_id: 3,
-    input_type: 1, //0== textfield, 1 == combobox, 2==upload
+    input_type: 4, //0== textfield, 1 == combobox, 2==upload
     upper_text: "¿Necesitarás aval?",
     options: ["Si", "No"],
     input_value: "",
