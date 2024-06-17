@@ -1,5 +1,5 @@
 import RoundedButton from "@/components/reusables/RoundedButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { StandardInput } from "@/components/reusables/StandardInput";
 import { StandardCombobox } from "@/components/reusables/StandardCombobox";
 import { StandardDownloadInput } from "@/components/reusables/StandardDownloadInput";
@@ -58,12 +58,73 @@ export default function MyInfoPageStep3({
 }: ComponentProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [disabledState, setDisabledState] = useState(false);
+
+  useEffect(() => {
+    if (step2InputsArrayState?.lenght > 1) {
+      getDisabledNextButton();
+    } else {
+      setDisabledState(true);
+    }
+  }, []);
 
   const setValueInArray = (inputValue: string, arrayPosition: number) => {
     let auxiliaryArray = step2InputsArrayState;
     auxiliaryArray[arrayPosition].input_value = inputValue;
     setStep2InputsArrayState(auxiliaryArray);
-    //console.log(step2InputsArrayState);
+    getDisabledNextButton();
+  };
+
+  const getDisabledNextButton = () => {
+    if (isPerson) {
+      if (step2InputsArrayState[0].input_value === "") {
+        setDisabledState(true);
+      } else if (step2InputsArrayState[2].input_value === "") {
+        setDisabledState(true);
+      } else if (step2InputsArrayState[4].input_value === "") {
+        setDisabledState(true);
+      } else if (step2InputsArrayState[6].input_value === "") {
+        setDisabledState(true);
+      } else if (step2InputsArrayState[8].input_value === "") {
+        setDisabledState(true);
+      } else if (step2InputsArrayState[10].input_value === "") {
+        setDisabledState(true);
+      } else if (step2InputsArrayState[11].input_value === "") {
+        setDisabledState(true);
+      } else if (step2InputsArrayState[12].input_value === "") {
+        setDisabledState(true);
+      } else if (step2InputsArrayState[13].input_value === "") {
+        setDisabledState(true);
+      } else if (step2InputsArrayState[14].input_value === "") {
+        setDisabledState(true);
+      } else if (step2InputsArrayState[15].input_value === "") {
+        setDisabledState(true);
+      } else {
+        setDisabledState(false);
+        console.log("is disabled 1");
+      }
+    } else {
+      if (step2InputsArrayState[1].input_value === "") {
+        setDisabledState(true);
+      } else if (step2InputsArrayState[3].input_value === "") {
+        setDisabledState(true);
+      } else if (step2InputsArrayState[5].input_value === "") {
+        setDisabledState(true);
+      } else if (step2InputsArrayState[7].input_value === "") {
+        setDisabledState(true);
+      } else if (step2InputsArrayState[9].input_value === "") {
+        setDisabledState(true);
+      } else if (step2InputsArrayState[10].input_value === "") {
+        setDisabledState(true);
+      } else if (step2InputsArrayState[11].input_value === "") {
+        setDisabledState(true);
+      } else if (step2InputsArrayState[12].input_value === "") {
+        setDisabledState(true);
+      } else {
+        setDisabledState(false);
+        console.log("is disabled 2");
+      }
+    }
   };
 
   const nextStep = async () => {
@@ -111,18 +172,20 @@ export default function MyInfoPageStep3({
             {index?.input_type === 0 ? (
               <StandardInput
                 upperText={index.upper_text}
-                setValueInArray={(value: string, position: number) =>
-                  setValueInArray(value, index.input_id)
-                }
+                setValueInArray={(value: string, position: number) => {
+                  setValueInArray(value, index.input_id);
+                  getDisabledNextButton();
+                }}
                 arrayPosition={index.input_id}
                 label={index?.input_label}
                 defaultValue={index.input_value}
               />
             ) : index?.input_type === 1 ? (
               <StandardCombobox
-                setValueInArray={(value: string, position: number) =>
-                  setValueInArray(value, index.input_id)
-                }
+                setValueInArray={(value: string, position: number) => {
+                  setValueInArray(value, index.input_id);
+                  getDisabledNextButton();
+                }}
                 arrayPosition={index.input_id}
                 upperText={index.upper_text}
                 options={index.options}
@@ -132,9 +195,10 @@ export default function MyInfoPageStep3({
             ) : index?.input_type === 2 ? (
               <StandardDownloadInput
                 upperText={index.upper_text}
-                setValueInArray={(value: string, position: number) =>
-                  setValueInArray(value, index.input_id)
-                }
+                setValueInArray={(value: string, position: number) => {
+                  setValueInArray(value, index.input_id);
+                  getDisabledNextButton();
+                }}
                 arrayPosition={index.input_id}
                 label={index?.input_label}
                 defaultValue={index.input_value}
@@ -147,7 +211,7 @@ export default function MyInfoPageStep3({
                     auxiliaryArray[index.input_id].first_input.input_value =
                       value;
                     setStep2InputsArrayState(auxiliaryArray);
-                    //console.log(step2InputsArrayState);
+                    getDisabledNextButton();
                   }}
                   arrayPosition={index.first_input.input_id}
                   upperText={index.upper_text}
@@ -162,7 +226,7 @@ export default function MyInfoPageStep3({
                     auxiliaryArray[index.input_id].second_input.input_value =
                       value;
                     setStep2InputsArrayState(auxiliaryArray);
-                    //console.log(step2InputsArrayState);
+                    getDisabledNextButton();
                   }}
                   arrayPosition={index.second_input.input_id}
                   label={index.second_input.input_label}
@@ -174,6 +238,7 @@ export default function MyInfoPageStep3({
                 upperText={index.upper_text}
                 setValueInArray={(value: string, position: number) => {
                   setValueInArray(value, index.input_id);
+                  getDisabledNextButton();
                 }}
                 arrayPosition={index.input_id}
                 label={index?.input_label}
@@ -224,6 +289,7 @@ export default function MyInfoPageStep3({
             primaryBackgroundColor
             whiteTextColor
             standardSize={false}
+            disabled={disabledState}
           />
         </div>
       </div>

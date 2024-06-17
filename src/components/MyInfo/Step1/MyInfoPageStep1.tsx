@@ -36,8 +36,13 @@ export default function MyInfoPageStep1({
 
   useEffect(() => {
     if (step1InputsArrayState?.lenght > 1) {
+      console.log(
+        "step1InputsArrayState?.lenght",
+        step1InputsArrayState?.lenght
+      );
       getDisabledNextButton();
     } else {
+      console.log("setDisabledState(true);");
       setDisabledState(true);
     }
   }, []);
@@ -156,7 +161,13 @@ export default function MyInfoPageStep1({
                 upperText={index.upper_text}
                 options={index.first_input.options}
                 label={index.first_input.input_label}
-                defaultValue={index.first_input.input_value ? "Si" : "No"}
+                defaultValue={
+                  index.first_input.input_value
+                    ? "Si"
+                    : index.input_value === false
+                    ? "No"
+                    : ""
+                }
               />
               {showPostulateGuarantor && (
                 <StandardInput
@@ -195,7 +206,13 @@ export default function MyInfoPageStep1({
                 upperText={index.upper_text}
                 options={index.options}
                 label={index.input_label}
-                defaultValue={index.input_value ? "Si" : "No"}
+                defaultValue={
+                  index.input_value
+                    ? "Si"
+                    : index.input_value === false
+                    ? "No"
+                    : ""
+                }
               />
             </div>
           ) : (
