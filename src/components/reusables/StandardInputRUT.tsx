@@ -33,7 +33,7 @@ export const StandardInputRUT = ({
       <div className="w-[100%] font-['Montserrat', 'Poppins', 'Roboto', 'Helvetica', 'Arial']">
         <div className="flex flex-row gap-1 items-baseline text-[#121212] font-medium text-[16px] font-['Montserrat', 'Poppins', 'Roboto', 'Helvetica', 'Arial']">
           {upperText + " "}
-          {rutLength > 2 ? (
+          {rutLength > 0 ? (
             validRut ? (
               <p className="text-[10px] text-[#5cb85c]">
                 ¡El RUT introducido es válido!

@@ -179,6 +179,7 @@ export default function MyInfoPageStep3({
                 arrayPosition={index.input_id}
                 label={index?.input_label}
                 defaultValue={index.input_value}
+                inputType={index.key === "22" ? "tel" : "text"}
               />
             ) : index?.input_type === 1 ? (
               <StandardCombobox

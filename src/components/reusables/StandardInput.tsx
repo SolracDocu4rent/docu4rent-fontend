@@ -7,6 +7,7 @@ interface ApplicationStep1Props {
   arrayPosition: number;
   label?: string;
   isEmail?: boolean;
+  inputType?: string;
   defaultValue: string;
 }
 
@@ -16,15 +17,23 @@ export const StandardInput = ({
   arrayPosition,
   label,
   isEmail = false,
+  inputType = "text",
   defaultValue,
 }: ApplicationStep1Props) => {
   const [inputValue, setInputValue] = React.useState(defaultValue);
+  const [inputTypeState, setInputTypeState] = React.useState(inputType);
   const [validEmail, setValidEmail] = React.useState(false);
   const [emailLength, setEmailLength] = React.useState(0);
 
   function validateEmail(email: string) {
     var re = /\S+@\S+\.\S+/;
     return re.test(email);
+  }
+  function validatePhone(rawTel: string) {
+    // phone number with only numeric, hyphen or + characters allowed
+    const cleanTel = rawTel.replaceAll(/[^\d\-+]/gim, "");
+
+    return cleanTel;
   }
 
   return (
@@ -51,16 +60,22 @@ export const StandardInput = ({
           placeholder={label}
           variant="outlined"
           onChange={({ target: { value } }) => {
-            if (isEmail) {
-              setEmailLength(value.length);
-              if (validateEmail(value)) {
-                setValidEmail(true);
-              } else {
-                setValidEmail(false);
+            if (inputType === "tel") {
+              let validPhone = validatePhone(value);
+              setValueInArray(validPhone, arrayPosition);
+              setInputValue(validPhone);
+            } else {
+              if (isEmail) {
+                setEmailLength(value.length);
+                if (validateEmail(value)) {
+                  setValidEmail(true);
+                } else {
+                  setValidEmail(false);
+                }
               }
+              setValueInArray(value, arrayPosition);
+              setInputValue(value);
             }
-            setValueInArray(value, arrayPosition);
-            setInputValue(value);
           }}
           value={inputValue}
           size="small"

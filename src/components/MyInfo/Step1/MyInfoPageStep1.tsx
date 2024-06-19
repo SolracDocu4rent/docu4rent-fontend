@@ -200,9 +200,9 @@ export default function MyInfoPageStep1({
 
                   if (value === "Si") {
                     auxiliaryArray[index.input_id].input_value = true;
-                    setShowPostulateGuarantor(true);
+                    // setShowPostulateGuarantor(true);
                   } else {
-                    setShowPostulateGuarantor(false);
+                    // setShowPostulateGuarantor(false);
                     auxiliaryArray[index.input_id].input_value = false;
                   }
                   setStep1InputsArrayState(auxiliaryArray);
