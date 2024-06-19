@@ -74,6 +74,7 @@ export default function MyInfoPageStep3({
               />
             ) : index?.input_type === 2 ? (
               <StandardDownloadInput
+                path={index.path}
                 upperText={index.upper_text}
                 setValueInArray={(value: string, position: number) =>
                   setValueInArray(value, index.input_id)
@@ -115,15 +116,17 @@ export default function MyInfoPageStep3({
             ) : index?.input_type === 4 ? (
               <div className="w-[100%] flex flex-col gap-3">
                 <StandardDownloadInput
+                  path={index.first_input.path}
                   upperText={index.upper_text}
                   setValueInArray={(value: string, position: number) => {
-                    //setValueInArray(value, index.input_id)
+                    console.log('here')
                   }}
                   arrayPosition={index.input_id}
                   label={"Carga documento 1"}
                   defaultValue={index.input_value}
                 />
                 <StandardDownloadInput
+                  path={index.second_input.path}
                   upperText={""}
                   setValueInArray={(value: string, position: number) => {
                     //setValueInArray(value, index.input_id)
@@ -136,15 +139,17 @@ export default function MyInfoPageStep3({
             ) : index?.input_type === 5 ? (
               <div className="w-[100%] flex flex-col gap-3">
                 <StandardDownloadInput
+                  path={index.first_input.path}
                   upperText={index.upper_text}
                   setValueInArray={(value: string, position: number) => {
-                    //setValueInArray(value, index.input_id)
+                    console.log('here')
                   }}
                   arrayPosition={index.input_id}
                   label={"Carga documento 1"}
                   defaultValue={index.input_value}
                 />
                 <StandardDownloadInput
+                  path={index.second_input.path}
                   upperText={""}
                   setValueInArray={(value: string, position: number) => {
                     //setValueInArray(value, index.input_id)
@@ -154,6 +159,7 @@ export default function MyInfoPageStep3({
                   defaultValue={index.input_value}
                 />
                 <StandardDownloadInput
+                  path={index.third_input.path}
                   upperText={""}
                   setValueInArray={(value: string, position: number) => {
                     //setValueInArray(value, index.input_id)
@@ -166,6 +172,7 @@ export default function MyInfoPageStep3({
             ) : index?.input_type === 6 ? (
               <div className="w-[100%] flex flex-col gap-3">
                 <StandardDownloadInput
+                  path={index.first_input.path}
                   upperText={index.upper_text}
                   setValueInArray={(value: string, position: number) => {
                     //setValueInArray(value, index.input_id)
@@ -175,6 +182,7 @@ export default function MyInfoPageStep3({
                   defaultValue={index.input_value}
                 />
                 <StandardDownloadInput
+                  path={index.second_input.path}
                   upperText={""}
                   setValueInArray={(value: string, position: number) => {
                     //setValueInArray(value, index.input_id)
@@ -184,6 +192,7 @@ export default function MyInfoPageStep3({
                   defaultValue={index.input_value}
                 />
                 <StandardDownloadInput
+                  path={index.third_input.path}
                   upperText={""}
                   setValueInArray={(value: string, position: number) => {
                     //setValueInArray(value, index.input_id)
@@ -193,6 +202,7 @@ export default function MyInfoPageStep3({
                   defaultValue={index.input_value}
                 />
                 <StandardDownloadInput
+                  path={index.fourth_input.path}
                   upperText={""}
                   setValueInArray={(value: string, position: number) => {
                     //setValueInArray(value, index.input_id)
@@ -202,6 +212,7 @@ export default function MyInfoPageStep3({
                   defaultValue={index.input_value}
                 />
                 <StandardDownloadInput
+                  path={index.fifth_input.path}
                   upperText={""}
                   setValueInArray={(value: string, position: number) => {
                     //setValueInArray(value, index.input_id)
@@ -211,6 +222,7 @@ export default function MyInfoPageStep3({
                   defaultValue={index.input_value}
                 />
                 <StandardDownloadInput
+                  path={index.sixth_input.path}
                   upperText={""}
                   setValueInArray={(value: string, position: number) => {
                     //setValueInArray(value, index.input_id)
@@ -274,6 +286,7 @@ export default function MyInfoPageStep3({
               />
             ) : index?.input_type === 2 ? (
               <StandardDownloadInput
+                path={index.path}
                 upperText={index.upper_text}
                 setValueInArray={(value: string, position: number) =>
                   setValueInArray(value, index.input_id)
@@ -315,6 +328,7 @@ export default function MyInfoPageStep3({
             ) : index?.input_type === 4 ? (
               <div className="w-[100%] flex flex-col gap-3">
                 <StandardDownloadInput
+                  path={index.first_input.path}
                   upperText={index.upper_text}
                   setValueInArray={(value: string, position: number) => {
                     //setValueInArray(value, index.input_id)
@@ -324,6 +338,7 @@ export default function MyInfoPageStep3({
                   defaultValue={index.input_value}
                 />
                 <StandardDownloadInput
+                  path={index.second_input.path}
                   upperText={""}
                   setValueInArray={(value: string, position: number) => {
                     //setValueInArray(value, index.input_id)
@@ -336,6 +351,7 @@ export default function MyInfoPageStep3({
             ) : index?.input_type === 5 ? (
               <div className="w-[100%] flex flex-col gap-3">
                 <StandardDownloadInput
+                  path={index.first_input.path}
                   upperText={index.upper_text}
                   setValueInArray={(value: string, position: number) => {
                     //setValueInArray(value, index.input_id)
@@ -345,6 +361,7 @@ export default function MyInfoPageStep3({
                   defaultValue={index.input_value}
                 />
                 <StandardDownloadInput
+                  path={index.second_input.path}
                   upperText={""}
                   setValueInArray={(value: string, position: number) => {
                     //setValueInArray(value, index.input_id)
@@ -354,6 +371,7 @@ export default function MyInfoPageStep3({
                   defaultValue={index.input_value}
                 />
                 <StandardDownloadInput
+                  path={index.third_input.path}
                   upperText={""}
                   setValueInArray={(value: string, position: number) => {
                     //setValueInArray(value, index.input_id)
@@ -366,6 +384,7 @@ export default function MyInfoPageStep3({
             ) : index?.input_type === 6 ? (
               <div className="w-[100%] flex flex-col gap-3">
                 <StandardDownloadInput
+                  path={index.first_input.path}
                   upperText={index.upper_text}
                   setValueInArray={(value: string, position: number) => {
                     //setValueInArray(value, index.input_id)
@@ -375,6 +394,7 @@ export default function MyInfoPageStep3({
                   defaultValue={index.input_value}
                 />
                 <StandardDownloadInput
+                  path={index.second_input.path}
                   upperText={""}
                   setValueInArray={(value: string, position: number) => {
                     //setValueInArray(value, index.input_id)
@@ -384,6 +404,7 @@ export default function MyInfoPageStep3({
                   defaultValue={index.input_value}
                 />
                 <StandardDownloadInput
+                  path={index.third_input.path}
                   upperText={""}
                   setValueInArray={(value: string, position: number) => {
                     //setValueInArray(value, index.input_id)
@@ -393,6 +414,7 @@ export default function MyInfoPageStep3({
                   defaultValue={index.input_value}
                 />
                 <StandardDownloadInput
+                  path={index.fourth_input.path}
                   upperText={""}
                   setValueInArray={(value: string, position: number) => {
                     //setValueInArray(value, index.input_id)
@@ -402,6 +424,7 @@ export default function MyInfoPageStep3({
                   defaultValue={index.input_value}
                 />
                 <StandardDownloadInput
+                  path={index.fifth_input.path}
                   upperText={""}
                   setValueInArray={(value: string, position: number) => {
                     //setValueInArray(value, index.input_id)
@@ -411,6 +434,7 @@ export default function MyInfoPageStep3({
                   defaultValue={index.input_value}
                 />
                 <StandardDownloadInput
+                  path={index.sixth_input.path}
                   upperText={""}
                   setValueInArray={(value: string, position: number) => {
                     //setValueInArray(value, index.input_id)

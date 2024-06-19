@@ -1,6 +1,9 @@
+import path from "path";
+
 let step3InputsArray: {
   key: string;
   input_id: number;
+  path?: string;
   input_type: number; //0== textfield, 1 == combobox, 2==upload ,  3 == double input(combobox + textfield), 4===double download, 5=== triple download, 6===sixtuple download
   upper_text: string;
   options: string[]; //only combobox has options. Textfield will be an empty array
@@ -31,6 +34,7 @@ let step3InputsArray: {
     first_input: {
       key: "130",
       input_id: 130,
+      path: '/salary/voucher_1',
       upper_text: "",
       input_value: "",
       input_label: "Carga documento 1",
@@ -38,6 +42,7 @@ let step3InputsArray: {
     second_input: {
       key: "131",
       input_id: 131,
+      path: '/salary/voucher_2',
       upper_text: "",
       input_value: "",
       input_label: "Carga documento 2",
@@ -45,6 +50,7 @@ let step3InputsArray: {
     third_input: {
       key: "132",
       input_id: 132,
+      path: '/salary/voucher_3',
       upper_text: "",
       input_value: "",
       input_label: "Carga documento 3",
@@ -52,6 +58,7 @@ let step3InputsArray: {
     fourth_input: {
       key: "133",
       input_id: 133,
+      path: '/salary/voucher_4',
       upper_text: "",
       input_value: "",
       input_label: "Carga documento 4",
@@ -59,6 +66,7 @@ let step3InputsArray: {
     fifth_input: {
       key: "134",
       input_id: 134,
+      path: '/salary/voucher_5',
       upper_text: "",
       input_value: "",
       input_label: "Carga documento 5",
@@ -66,6 +74,7 @@ let step3InputsArray: {
     sixth_input: {
       key: "135",
       input_id: 135,
+      path: '/salary/voucher_6',
       upper_text: "",
       input_value: "",
       input_label: "Carga documento 6",
@@ -78,6 +87,7 @@ let step3InputsArray: {
   {
     key: "31",
     input_id: 1,
+    path: "RUT",
     input_type: 2, //0== textfield, 1 == combobox, 2==upload ,  3 == double input(combobox + textfield), 4===double download, 5=== triple download, 6===sixtuple download
     upper_text: "Adjunta Fotocopia de RUT (si corresponde)",
     options: [],
@@ -108,6 +118,7 @@ let step3InputsArray: {
     first_input: {
       key: "136",
       input_id: 136,
+      path: "/contract/F22_1",
       upper_text: "",
       input_value: "",
       input_label: "Carga documento 1",
@@ -115,6 +126,7 @@ let step3InputsArray: {
     second_input: {
       key: "137",
       input_id: 137,
+      path: "/contract/22_2",
       upper_text: "",
       input_value: "",
       input_label: "Carga documento 2",
@@ -141,6 +153,7 @@ let step3InputsArray: {
     first_input: {
       key: "138",
       input_id: 138,
+      path:"/salay/voucher_1",
       upper_text: "",
       input_value: "",
       input_label: "Carga documento 1",
@@ -148,6 +161,7 @@ let step3InputsArray: {
     second_input: {
       key: "139",
       input_id: 139,
+      path:"/salay/voucher_2",
       upper_text: "",
       input_value: "",
       input_label: "Carga documento 2",
@@ -155,6 +169,7 @@ let step3InputsArray: {
     third_input: {
       key: "140",
       input_id: 140,
+      path:"/salay/voucher_3",
       upper_text: "",
       input_value: "",
       input_label: "Carga documento 3",
@@ -179,6 +194,7 @@ let step3InputsArray: {
     first_input: {
       key: "141",
       input_id: 141,
+      path:"/AFP/quote_1",
       upper_text: "",
       input_value: "",
       input_label: "Carga documento 1",
@@ -186,6 +202,7 @@ let step3InputsArray: {
     second_input: {
       key: "142",
       input_id: 142,
+      path:"/AFP/quote_2",
       upper_text: "",
       input_value: "",
       input_label: "Carga documento 2",
@@ -193,6 +210,7 @@ let step3InputsArray: {
     third_input: {
       key: "143",
       input_id: 143,
+      path:"/AFP/quote_3",
       upper_text: "",
       input_value: "",
       input_label: "Carga documento 3",
@@ -208,6 +226,7 @@ let step3InputsArray: {
   {
     key: "41",
     input_id: 5,
+    path:"/contract/contract",
     input_type: 2, //0== textfield, 1 == combobox, 2==upload ,  3 == double input(combobox + textfield), 4===double download, 5=== triple download, 6===sixtuple download
     upper_text: "Adjunta tu contrato de trabajo",
     options: [],
@@ -229,6 +248,7 @@ let step3InputsArray: {
   {
     key: "42",
     input_id: 6,
+    path:"/company/constitution",
     input_type: 2, //0== textfield, 1 == combobox, 2==upload ,  3 == double input(combobox + textfield), 4===double download, 5=== triple download, 6===sixtuple download
     upper_text: "Adjunta la Escritura de Constitución de la Sociedad",
     options: [],
@@ -258,6 +278,7 @@ let step3InputsArray: {
     first_input: {
       key: "144",
       input_id: 144,
+      path:"/contract/f29_1",
       upper_text: "",
       input_value: "",
       input_label: "Carga documento 1",
@@ -265,6 +286,7 @@ let step3InputsArray: {
     second_input: {
       key: "145",
       input_id: 145,
+      path:"/contract/f29_2",
       upper_text: "",
       input_value: "",
       input_label: "Carga documento 2",
@@ -272,6 +294,7 @@ let step3InputsArray: {
     third_input: {
       key: "146",
       input_id: 146,
+      path:"/contract/f29_3",
       upper_text: "",
       input_value: "",
       input_label: "Carga documento 3",
@@ -279,6 +302,7 @@ let step3InputsArray: {
     fourth_input: {
       key: "147",
       input_id: 147,
+      path:"/contract/f29_4",
       upper_text: "",
       input_value: "",
       input_label: "Carga documento 4",
@@ -286,6 +310,7 @@ let step3InputsArray: {
     fifth_input: {
       key: "148",
       input_id: 148,
+      path:"/contract/f29_5",
       upper_text: "",
       input_value: "",
       input_label: "Carga documento 5",
@@ -293,6 +318,7 @@ let step3InputsArray: {
     sixth_input: {
       key: "149",
       input_id: 149,
+      path:"/contract/f29_6",
       upper_text: "",
       input_value: "",
       input_label: "Carga documento 6",
@@ -305,6 +331,7 @@ let step3InputsArray: {
   {
     key: "44",
     input_id: 8,
+    path:"/company/rut",
     input_type: 2, //0== textfield, 1 == combobox, 2==upload ,  3 == double input(combobox + textfield), 4===double download, 5=== triple download, 6===sixtuple download
     upper_text: "Fotocopia del RUT",
     options: [],
@@ -325,6 +352,7 @@ let step3InputsArray: {
   {
     key: "45",
     input_id: 9,
+    path:"/company/legal_representative",
     input_type: 2, //0== textfield, 1 == combobox, 2==upload ,  3 == double input(combobox + textfield), 4===double download, 5=== triple download, 6===sixtuple download
     upper_text:
       "Escritura con poderes del Representante Legal para celebrar contratos de arriendo",
@@ -346,6 +374,7 @@ let step3InputsArray: {
   {
     key: "46",
     input_id: 10,
+    path:"/identity/front_rut",
     input_type: 2, //0== textfield, 1 == combobox, 2==upload ,  3 == double input(combobox + textfield), 4===double download, 5=== triple download, 6===sixtuple download
     upper_text: "Adjunta tu cédula de identidad frontal representante Legal",
     options: [],
@@ -366,6 +395,7 @@ let step3InputsArray: {
   {
     key: "47",
     input_id: 11,
+    path:"/company/back_rut_legal_representative",
     input_type: 2, //0== textfield, 1 == combobox, 2==upload ,  3 == double input(combobox + textfield), 4===double download, 5=== triple download, 6===sixtuple download
     upper_text: "Adjunta tu cédula de identidad trasera representante Legal",
     options: [],
@@ -386,6 +416,7 @@ let step3InputsArray: {
   {
     key: "48",
     input_id: 12,
+    path:"/contract/tax_folder",
     input_type: 2, //0== textfield, 1 == combobox, 2==upload ,  3 == double input(combobox + textfield), 4===double download, 5=== triple download, 6===sixtuple download
     upper_text: "Adjunta tu Carpeta Tributaria",
     options: [],
@@ -406,6 +437,7 @@ let step3InputsArray: {
   {
     key: "49",
     input_id: 13,
+    path:"/contract/validity_certificate",
     input_type: 2, //0== textfield, 1 == combobox, 2==upload ,  3 == double input(combobox + textfield), 4===double download, 5=== triple download, 6===sixtuple download
     upper_text: "Adjunta Certificado de Vigencia",
     options: [],
@@ -426,6 +458,7 @@ let step3InputsArray: {
   {
     key: "50",
     input_id: 14,
+    path:"/contract/f22",
     input_type: 2, //0== textfield, 1 == combobox, 2==upload ,  3 == double input(combobox + textfield), 4===double download, 5=== triple download, 6===sixtuple download
     upper_text:
       "Adjunta tu Delcaración de Renta (Formulario 22) del año anterior",
@@ -447,6 +480,7 @@ let step3InputsArray: {
   {
     key: "51",
     input_id: 15,
+    path:"/equifax/360",
     input_type: 2, //0== textfield, 1 == combobox, 2==upload ,  3 == double input(combobox + textfield), 4===double download, 5=== triple download, 6===sixtuple download
     upper_text: "Adjunta tu certificado de arriendos (Destacame o Equifax)",
     options: [],
@@ -467,6 +501,7 @@ let step3InputsArray: {
   {
     key: "52",
     input_id: 16,
+    path:"/identity/front_rut",
     input_type: 2, //0== textfield, 1 == combobox, 2==upload ,  3 == double input(combobox + textfield), 4===double download, 5=== triple download, 6===sixtuple download
     upper_text: "Adjunta tu cédula de identidad frontal",
     options: [],
@@ -487,6 +522,7 @@ let step3InputsArray: {
   {
     key: "53",
     input_id: 17,
+    path:"/identity/back_rut",
     input_type: 2, //0== textfield, 1 == combobox, 2==upload ,  3 == double input(combobox + textfield), 4===double download, 5=== triple download, 6===sixtuple download
     upper_text: "Adjunta tu cédula de identidad trasera",
     options: [],
