@@ -55,28 +55,17 @@ class FirebaseService {
       const currentUser = auth.currentUser;
       if (currentUser) {
         const storageRef = ref(fbStorage, currentUser.uid + path);
-
-        // Iniciar la carga del archivo
         const uploadTask = uploadBytesResumable(storageRef, file);
-
-        // Obtener URL de descarga del archivo después de la carga
         return new Promise((resolve, reject) => {
           uploadTask.on('state_changed',
             (snapshot) => {
-              // Manejar progreso de la carga (opcional)
-              // const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-              // console.log('Progreso de carga: ' + progress + '%');
             },
             (error) => {
-              // Manejar errores durante la carga
               console.error('Error al cargar el archivo:', error);
               reject(new Error('Error al cargar el archivo'));
             },
             async () => {
-              // Carga completada con éxito
               console.log('Archivo cargado correctamente');
-
-              // Obtener URL de descarga del archivo
               try {
                 const downloadURL = await getDownloadURL(storageRef);
                 resolve(downloadURL);
