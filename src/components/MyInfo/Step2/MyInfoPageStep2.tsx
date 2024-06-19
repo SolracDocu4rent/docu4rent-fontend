@@ -128,6 +128,7 @@ export default function MyInfoPageStep3({
               />
             ) : index?.input_type === 2 ? (
               <StandardDownloadInput
+                path={index.path}
                 upperText={index.upper_text}
                 setValueInArray={(value: string, position: number) =>
                   setValueInArray(value, index.input_id)
