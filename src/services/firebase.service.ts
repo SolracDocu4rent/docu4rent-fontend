@@ -84,6 +84,46 @@ class FirebaseService {
       throw new Error('Error al preparar la carga del archivo');
     }
   }
+
+  async getApplications(): Promise<any> {
+    try {
+      const currentUser = auth.currentUser;
+      if (currentUser) {
+        let userId = currentUser.uid
+        const q = query(
+          collection(firestore, 'applications'),
+          where('userId', '==', userId)
+        );
+        const querySnapshot = await getDocs(q);
+        const applications: DocumentData[] = [];
+        querySnapshot.forEach((doc) => {
+          applications.push({ id: doc.id, data: doc.data() });
+        });
+        return applications;
+      } else {
+        return []
+      }
+    } catch (error) {
+      console.error('Error al obtener solicitudes:', error);
+      throw new Error('Error al obtener solicitudeso');
+    }
+  }
+
+  async getApplicationData(applicationId: string) {
+    try {
+      const docRef = doc(firestore, 'applicationData', applicationId);
+      const docSnapshot = await getDoc(docRef);
+
+      if (docSnapshot.exists()) {
+        return docSnapshot.data();
+      } else {
+        throw new Error(`No se encontró ninguna aplicación con el ID: ${applicationId}`);
+      }
+    } catch (error) {
+      console.error('Error al obtener los datos de la aplicación:', error);
+      throw new Error('Error al obtener los datos de la aplicación');
+    }
+  }
 }
 
 const firebaseServiceInstance = new FirebaseService();
