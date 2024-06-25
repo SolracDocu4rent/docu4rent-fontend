@@ -43,7 +43,6 @@ export default function HomePage() {
         let detailedRow = innerValueOfRow;
         detailedRow.comuna = res[0]?.data?.commune;
         detailedRow.direccion = res[0]?.data?.street;
-        console.log("getApplicationsDetails",res);
         return(detailedRow)
       }
     );
@@ -51,27 +50,23 @@ export default function HomePage() {
 
 
 
-  const getApplications = async () => {
-    await firebaseServiceInstance.getApplications().then((res) =>{
+
+  const getFullApplicationsData = async () => {
+    await firebaseServiceInstance.getFullApplicationsData().then((res) =>{
       let y:any = [];
       let cont = 0;
-      console.log("getApplications",res);
       //maybe res should be ordered by date of creation DESC
       res.map(async (index:any) =>{
         cont++;
-       
-        if (cont < 6) {
-          console.log(cont,index)
+        if (cont < 15) {
           let x={
             id: index?.id, //Nro de lote
             status: "Rechazada", //status
-            region: "",
-            comuna: "",
-            direccion: "",
+            region: index?.region,
+            comuna: index?.commune,
+            direccion: index?.street
           };
-          let z = await getApplicationsDetails(x)
-          console.log(z)
-          y.push(z);
+          y.push(x);
 
           
         }
@@ -87,7 +82,9 @@ export default function HomePage() {
 
   useEffect(() => {
     //trae los datos cuando se entra a la pagina 
-    getApplications();
+    //getApplications();
+    getFullApplicationsData();
+
     //getApplicationsDetails("xd");
   }, []);
 
@@ -120,7 +117,7 @@ export default function HomePage() {
           >
             <div className="flex flex-row items-center gap-3">
               <NotificationsNoneRoundedIcon htmlColor="#121212" />
-              <p className="font-medium">{index?.name}</p>
+              <p className="font-medium">{index?.direccion && index?.direccion } { " " + index?.comuna && index?.comuna } { " " + index?.region && index?.region}</p>
             </div>
             <div
               className={

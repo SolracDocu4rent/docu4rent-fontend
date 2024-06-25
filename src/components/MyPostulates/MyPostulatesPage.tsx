@@ -131,7 +131,7 @@ export default function MyPostulatesPage() {
     await firebaseServiceInstance.getApplications().then((res) =>{
       setPostulatesData(res);
       let y:any = [];
-      console.log("getApplications",res);
+      //console.log("getApplications",res);
       res.map((index:any) =>{
         let x={
           type: index?.data?.type , //"Persona Natural" o "Empresa"
@@ -177,6 +177,7 @@ export default function MyPostulatesPage() {
     );
     
   };
+  
   const getApplicationsDetails = async (innerValueOfRow: any) => {
     await firebaseServiceInstance.getApplicationData(innerValueOfRow?.id).then((res) =>
       { //FALTA CORREO DE USUARIO,  REGION, NUMERO, BLOQUE, DATOS DE LA EMPRESA
@@ -204,15 +205,24 @@ export default function MyPostulatesPage() {
         detailedRow.direccion = res[0]?.data?.street;
         detailedRow.tipoTrabajador = res[0]?.data?.workerType;
         
-        console.log("getApplicationsDetails",res);
+        // console.log("getApplicationsDetails",res);
         setDialogData(detailedRow)
       }
     );
   };
 
+  const getFullApplicationsData = async () => {
+    await firebaseServiceInstance.getFullApplicationsData().then((res) =>{
+      //console.log("full application",res)
+    }
+    );
+    
+  };
+
   useEffect(() => {
     //trae los datos cuando se entra a la pagina 
     getApplications();
+    //getFullApplicationsData();
     //getApplicationsDetails("xd");
   }, []);
 
@@ -398,7 +408,7 @@ export default function MyPostulatesPage() {
       <div className="text-decoration-line: underline text-[#BBBBBB] cursor-pointer ">
         <p
           onClick={() => {
-            console.log("innerValueOfRow", innerValueOfRow);
+            //console.log("innerValueOfRow", innerValueOfRow);
             getApplicationsDetails(innerValueOfRow);
             //setDialogData(innerValueOfRow);
             setOpenDetailDialog(true);

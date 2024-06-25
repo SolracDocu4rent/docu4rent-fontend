@@ -134,14 +134,15 @@ class FirebaseService {
   async getFullApplicationsData(): Promise<any> {
     try {
       const applications = await this.getApplications();
-      const fullApplicationsData: DocumentData[] = [];
+      const fullApplicationsData: any[] = [];
 
       for (const app of applications) {
         const applicationId = app.id;
         const applicationData = await this.getApplicationData(applicationId);
-        if (applicationData) {
-          const fullData = { ...app.data, ...applicationData.data };
+         if (applicationData) {
+          const fullData = { ...app.data, ...applicationData[0]?.data };
           fullApplicationsData.push(fullData);
+          console.log("fulldata",fullData)
         }
       }
       return fullApplicationsData;
