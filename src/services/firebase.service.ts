@@ -109,8 +109,7 @@ class FirebaseService {
     }
   }
 
-  async getApplicationData(applicationId: string) {
-    console.log("el id para consultar es:", applicationId)
+  async getApplicationData(applicationId: string): Promise<any> {
     try {
       const currentUser = auth.currentUser;
       if (currentUser) {
@@ -130,6 +129,25 @@ class FirebaseService {
     } catch (error) {
       console.error('Error al obtener solicitudes:', error);
       throw new Error('Error al obtener solicitudeso');
+    }
+  }
+  async getFullApplicationsData(): Promise<any> {
+    try {
+      const applications = await this.getApplications();
+      const fullApplicationsData: DocumentData[] = [];
+
+      for (const app of applications) {
+        const applicationId = app.id;
+        const applicationData = await this.getApplicationData(applicationId);
+        if (applicationData) {
+          const fullData = { ...app.data, ...applicationData.data };
+          fullApplicationsData.push(fullData);
+        }
+      }
+      return fullApplicationsData;
+    } catch (error) {
+      console.error('Error al obtener datos completos de aplicaciones:', error);
+      throw new Error('Error al obtener datos completos de aplicaciones');
     }
   }
 }
