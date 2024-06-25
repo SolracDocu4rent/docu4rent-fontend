@@ -110,18 +110,26 @@ class FirebaseService {
   }
 
   async getApplicationData(applicationId: string) {
+    console.log("el id para consultar es:", applicationId)
     try {
-      const docRef = doc(firestore, 'applicationData', applicationId);
-      const docSnapshot = await getDoc(docRef);
-
-      if (docSnapshot.exists()) {
-        return docSnapshot.data();
+      const currentUser = auth.currentUser;
+      if (currentUser) {
+        const q = query(
+          collection(firestore, 'applicationData'),
+          where('applicationId', '==', applicationId)
+        );
+        const querySnapshot = await getDocs(q);
+        const applications: DocumentData[] = [];
+        querySnapshot.forEach((doc) => {
+          applications.push({ id: doc.id, data: doc.data() });
+        });
+        return applications;
       } else {
-        throw new Error(`No se encontró ninguna aplicación con el ID: ${applicationId}`);
+        return []
       }
     } catch (error) {
-      console.error('Error al obtener los datos de la aplicación:', error);
-      throw new Error('Error al obtener los datos de la aplicación');
+      console.error('Error al obtener solicitudes:', error);
+      throw new Error('Error al obtener solicitudeso');
     }
   }
 }
