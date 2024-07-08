@@ -1,6 +1,7 @@
 import RoundedButton from "@/components/reusables/RoundedButton";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dialog, TextField } from "@mui/material";
+import firebaseServiceInstance from "@/services/firebase.service";
 import {
   DataGrid,
   GridColDef,
@@ -13,6 +14,8 @@ export default function MyPostulatesPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [openDetailDialog, setOpenDetailDialog] = useState(false);
+  const [postulatesData, setPostulatesData] = useState([]);
+  const [postulatesDataDetail, setPostulatesDataDetail] = useState({});
   const [dialogData, setDialogData] = useState({
     id: "", //Nro de lote
     receiver: "",
@@ -50,80 +53,178 @@ export default function MyPostulatesPage() {
   });
   const [formsDataFormatted, setformsDataFormatted] = useState([
     //MOCKDATA
-    {
-      id: "123", //Nro de lote
-      receiver: "",
-      receivingEmail: "nodata", //regulacion
-      endorsement: "", //nombre de producto
-      shippingDate: "", //etapa
-      validityDays: "", //finca
-      status: "Rechazada", //status
-      dateOfCreation: "", //Creado
-      //document: "", //documento
-      nombre: "francisca paz",
-      apellidoPaterno: "Neira",
-      apellidoMaterno: "Ribes",
-      RUT: "18.169.151-4",
-      nacionalidad: "chilena",
-      estadoCivil: "soltera",
-      profesion: "Disenadora",
-      TelefonoContacto: "+569123475679",
-      correoElectronico: "fpneira@uc.cl",
-      region: "Metropolitana de santiago",
-      comuna: "Las Condes",
-      direccion: "avenida las condes",
-      numero: "7167",
-      dpto: "116",
-      nombreEmpresa: "Fallabella Financiero SpA",
-      RutEmpresa: "73.123.456-7",
-      telefonoEmpresa: "+562212345679",
-      direccionEmpresa: "Rosario Norte 660 Las Condes",
-      antiguedadLaboral: "1 año y 9 meses",
-      tipoTrabajador: "Dependiente",
-      AFP: "Modelo",
-      ultimoPago: "29/03/2024",
-      sueldoBase: "2600000",
-      sueldoLiquido: "2100000",
-    },
-    {
-      id: "456", //Nro de lote
-      receiver: "",
-      receivingEmail: "nodata", //regulacion
-      endorsement: "", //nombre de producto
-      shippingDate: "", //etapa
-      validityDays: "", //finca
-      status: "Rechazada", //status
-      dateOfCreation: "", //Creado
-      //document: "", //documento
-      nombre: "Jose Alejandro",
-      apellidoPaterno: "Romero",
-      apellidoMaterno: "Melendez",
-      RUT: "18.169.151-4",
-      nacionalidad: "chilena",
-      estadoCivil: "soltera",
-      profesion: "Disenadora",
-      TelefonoContacto: "+569123475679",
-      correoElectronico: "fpneira@uc.cl",
-      region: "Metropolitana de santiago",
-      comuna: "Las Condes",
-      direccion: "avenida las condes",
-      numero: "7167",
-      dpto: "116",
-      nombreEmpresa: "Fallabella Financiero SpA",
-      RutEmpresa: "73.123.456-7",
-      telefonoEmpresa: "+562212345679",
-      direccionEmpresa: "Rosario Norte 660 Las Condes",
-      antiguedadLaboral: "1 año y 9 meses",
-      tipoTrabajador: "Dependiente",
-      AFP: "Modelo",
-      ultimoPago: "29/03/2024",
-      sueldoBase: "2600000",
-      sueldoLiquido: "2100000",
-    },
+    // {
+    //   id: "123", //Nro de lote
+    //   receiver: "",
+    //   receivingEmail: "nodata", //regulacion
+    //   endorsement: "", //nombre de producto
+    //   shippingDate: "", //etapa
+    //   validityDays: "", //finca
+    //   status: "Rechazada", //status
+    //   dateOfCreation: "", //Creado
+    //   //document: "", //documento
+    //   nombre: "francisca paz",
+    //   apellidoPaterno: "Neira",
+    //   apellidoMaterno: "Ribes",
+    //   RUT: "18.169.151-4",
+    //   nacionalidad: "chilena",
+    //   estadoCivil: "soltera",
+    //   profesion: "Disenadora",
+    //   TelefonoContacto: "+569123475679",
+    //   correoElectronico: "fpneira@uc.cl",
+    //   region: "Metropolitana de santiago",
+    //   comuna: "Las Condes",
+    //   direccion: "avenida las condes",
+    //   numero: "7167",
+    //   dpto: "116",
+    //   nombreEmpresa: "Fallabella Financiero SpA",
+    //   RutEmpresa: "73.123.456-7",
+    //   telefonoEmpresa: "+562212345679",
+    //   direccionEmpresa: "Rosario Norte 660 Las Condes",
+    //   antiguedadLaboral: "1 año y 9 meses",
+    //   tipoTrabajador: "Dependiente",
+    //   AFP: "Modelo",
+    //   ultimoPago: "29/03/2024",
+    //   sueldoBase: "2600000",
+    //   sueldoLiquido: "2100000",
+    // },
+    // {
+    //   id: "456", //Nro de lote
+    //   receiver: "",
+    //   receivingEmail: "nodata", //regulacion
+    //   endorsement: "", //nombre de producto
+    //   shippingDate: "", //etapa
+    //   validityDays: "", //finca
+    //   status: "Rechazada", //status
+    //   dateOfCreation: "", //Creado
+    //   //document: "", //documento
+    //   nombre: "Jose Alejandro",
+    //   apellidoPaterno: "Romero",
+    //   apellidoMaterno: "Melendez",
+    //   RUT: "18.169.151-4",
+    //   nacionalidad: "chilena",
+    //   estadoCivil: "soltera",
+    //   profesion: "Disenadora",
+    //   TelefonoContacto: "+569123475679",
+    //   correoElectronico: "fpneira@uc.cl",
+    //   region: "Metropolitana de santiago",
+    //   comuna: "Las Condes",
+    //   direccion: "avenida las condes",
+    //   numero: "7167",
+    //   dpto: "116",
+    //   nombreEmpresa: "Fallabella Financiero SpA",
+    //   RutEmpresa: "73.123.456-7",
+    //   telefonoEmpresa: "+562212345679",
+    //   direccionEmpresa: "Rosario Norte 660 Las Condes",
+    //   antiguedadLaboral: "1 año y 9 meses",
+    //   tipoTrabajador: "Dependiente",
+    //   AFP: "Modelo",
+    //   ultimoPago: "29/03/2024",
+    //   sueldoBase: "2600000",
+    //   sueldoLiquido: "2100000",
+    // },
   ]);
 
   const [clickedFiltre, setclickedFiltre] = useState("Todas"); //for later use, working code
   const [arrayOfRows, setarrayOfRows] = useState(formsDataFormatted);
+  const getApplications = async () => {
+    await firebaseServiceInstance.getApplications().then((res) =>{
+      setPostulatesData(res);
+      let y:any = [];
+      //console.log("getApplications",res);
+      res.map((index:any) =>{
+        let x={
+          type: index?.data?.type , //"Persona Natural" o "Empresa"
+          id: index?.id, //Nro de lote
+          receiver: index?.data?.brokerEmail,
+          receivingEmail: index?.data?.broker, //regulacion
+          endorsement: index?.data?.needCosigner? "Si" : "No", //nombre de producto
+          shippingDate: "", //etapa
+          validityDays: index?.data?.linkTime, //finca
+          status: "Rechazada", //status
+          dateOfCreation: "", //Creado
+          //document: "", //documento
+          nombre: "",
+          apellidoPaterno: "",
+          apellidoMaterno: "",
+          RUT: "",
+          nacionalidad: "",
+          estadoCivil: "",
+          profesion: "",
+          TelefonoContacto: "",
+          correoElectronico: "",
+          region: "",
+          comuna: "",
+          direccion: "",
+          numero: "",
+          dpto: "",
+          nombreEmpresa: "",
+          RutEmpresa: "",
+          telefonoEmpresa: "",
+          direccionEmpresa: "",
+          antiguedadLaboral: "",
+          tipoTrabajador: "",
+          AFP: "",
+          ultimoPago: "",
+          sueldoBase: "",
+          sueldoLiquido: "",
+        }
+        y.push(x);
+        
+      });
+      setarrayOfRows(y);
+    }
+    );
+    
+  };
+  
+  const getApplicationsDetails = async (innerValueOfRow: any) => {
+    await firebaseServiceInstance.getApplicationData(innerValueOfRow?.id).then((res) =>
+      { //FALTA CORREO DE USUARIO,  REGION, NUMERO, BLOQUE, DATOS DE LA EMPRESA
+        let detailedRow = innerValueOfRow;
+        detailedRow.estadoCivil = res[0]?.data?.civilStatus;
+        detailedRow.comuna = res[0]?.data?.commune;
+        
+        if (detailedRow.type === "Empresa"){
+          detailedRow.nombre = res[0]?.data?.company?.legalRepresentativeName
+          detailedRow.apellidoMaterno = res[0]?.data?.company?.legalRepresentativeMotherLastName
+          detailedRow.apellidoPaterno = res[0]?.data?.company?.legalRepresentativeFatherLastName
+          detailedRow.RUT = res[0]?.data?.company?.legalRepresentativeRut
+        }else{
+          detailedRow.nombre = res[0]?.data?.name;
+          detailedRow.apellidoPaterno = res[0]?.data?.fatherLastName;
+          detailedRow.apellidoMaterno = res[0]?.data?.motherLastName;
+          detailedRow.apellidoMaterno = res[0]?.data?.motherLastName;
+          detailedRow.RUT = res[0]?.data?.rut;
+        }
+        
+        detailedRow.nacionalidad = res[0]?.data?.nationality;
+        detailedRow.TelefonoContacto = res[0]?.data?.phone;
+        detailedRow.profesion = res[0]?.data?.profession;
+        detailedRow.RutEmpresa = res[0]?.data?.company?.rut
+        detailedRow.direccion = res[0]?.data?.street;
+        detailedRow.tipoTrabajador = res[0]?.data?.workerType;
+        
+        // console.log("getApplicationsDetails",res);
+        setDialogData(detailedRow)
+      }
+    );
+  };
+
+  const getFullApplicationsData = async () => {
+    await firebaseServiceInstance.getFullApplicationsData().then((res) =>{
+      //console.log("full application",res)
+    }
+    );
+    
+  };
+
+  useEffect(() => {
+    //trae los datos cuando se entra a la pagina 
+    getApplications();
+    //getFullApplicationsData();
+    //getApplicationsDetails("xd");
+  }, []);
 
   // useEffect(() => {
   //   fetch(
@@ -302,12 +403,14 @@ export default function MyPostulatesPage() {
 
   function RenderApplication(props: GridRenderCellParams<any>) {
     const innerValueOfRow = props?.row;
+    
     return (
       <div className="text-decoration-line: underline text-[#BBBBBB] cursor-pointer ">
         <p
           onClick={() => {
-            console.log("innerValueOfRow", innerValueOfRow);
-            setDialogData(innerValueOfRow);
+            //console.log("innerValueOfRow", innerValueOfRow);
+            getApplicationsDetails(innerValueOfRow);
+            //setDialogData(innerValueOfRow);
             setOpenDetailDialog(true);
           }}
           className="hover:font-semibold"
@@ -442,7 +545,7 @@ export default function MyPostulatesPage() {
           <div className="flex flex-row gap-[5%] p-5">
             <div className=" w-[45%] border-b-[2.5px] border-b-gray">
               <p className="text-[12px] text-[#466197]">
-                Metropolitana de Santiago
+                Región
               </p>
               <p className="text-[#121212] text-[18px] ">
                 {dialogData?.region}

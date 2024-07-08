@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-
+import firebaseServiceInstance from "@/services/firebase.service";
 import AddBoxOutlinedIcon from "@mui/icons-material/AddBoxOutlined";
 import NotificationsNoneRoundedIcon from "@mui/icons-material/NotificationsNoneRounded";
 import { useRouter } from "next/navigation";
@@ -33,6 +33,59 @@ export default function HomePage() {
     let x: any = [];
     x.push({ key: 1, name: "nombre", status: "Rechazados" });
     //setarrayOfNotifications(mockdata); //comentar para ver los envios vacios. Descomentar para ver mock data
+
+
+  }, []);
+  
+  const getApplicationsDetails = async (innerValueOfRow: any) => {
+    await firebaseServiceInstance.getApplicationData(innerValueOfRow?.id).then((res) =>
+      { //FALTA CORREO DE USUARIO,  REGION, NUMERO, BLOQUE, DATOS DE LA EMPRESA
+        let detailedRow = innerValueOfRow;
+        detailedRow.comuna = res[0]?.data?.commune;
+        detailedRow.direccion = res[0]?.data?.street;
+        return(detailedRow)
+      }
+    );
+  };
+
+
+
+
+  const getFullApplicationsData = async () => {
+    await firebaseServiceInstance.getFullApplicationsData().then((res) =>{
+      let y:any = [];
+      let cont = 0;
+      //maybe res should be ordered by date of creation DESC
+      res.map(async (index:any) =>{
+        cont++;
+        if (cont < 15) {
+          let x={
+            id: index?.id, //Nro de lote
+            status: "Rechazada", //status
+            region: index?.region,
+            comuna: index?.commune,
+            direccion: index?.street
+          };
+          y.push(x);
+
+          
+        }
+        
+        
+      });
+      
+      setarrayOfNotifications(y);
+    }
+    );
+    
+  };
+
+  useEffect(() => {
+    //trae los datos cuando se entra a la pagina 
+    //getApplications();
+    getFullApplicationsData();
+
+    //getApplicationsDetails("xd");
   }, []);
 
   const arrayPrinterOfNotifications = () => {
@@ -64,7 +117,7 @@ export default function HomePage() {
           >
             <div className="flex flex-row items-center gap-3">
               <NotificationsNoneRoundedIcon htmlColor="#121212" />
-              <p className="font-medium">{index?.name}</p>
+              <p className="font-medium">{index?.direccion && index?.direccion } { " " + index?.comuna && index?.comuna } { " " + index?.region && index?.region}</p>
             </div>
             <div
               className={
