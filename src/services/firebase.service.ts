@@ -28,6 +28,26 @@ class FirebaseService {
     }
   }
 
+  async getBrokers(): Promise<DocumentData[]> {
+    try {
+      const currentUser = auth.currentUser;
+      if (currentUser) {
+        const q = collection(firestore, 'brokers');
+        const querySnapshot = await getDocs(q);
+        const brokers: DocumentData[] = [];
+        querySnapshot.forEach((doc) => {
+          brokers.push({ id: doc.id, data: doc.data() });
+        });
+        return brokers;
+      } else {
+        throw new Error('No hay usuario autenticado');
+      }
+    } catch (error) {
+      console.error('Error al obtener brokers:', error);
+      throw new Error('Error al obtener brokers');
+    }
+  }
+
   async getUserToken(): Promise<string | undefined> {
     const currentUser = auth.currentUser;
     return await currentUser?.getIdToken();
@@ -139,10 +159,10 @@ class FirebaseService {
       for (const app of applications) {
         const applicationId = app.id;
         const applicationData = await this.getApplicationData(applicationId);
-         if (applicationData) {
+        if (applicationData) {
           const fullData = { ...app.data, ...applicationData[0]?.data };
           fullApplicationsData.push(fullData);
-          console.log("fulldata",fullData)
+          console.log("fulldata", fullData)
         }
       }
       return fullApplicationsData;

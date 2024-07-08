@@ -12,6 +12,7 @@ import SelectPaymentStep from "@/components/MyInfo/Step4-SelectPayment/SelectPay
 import OutdatedDataStep from "@/components/MyInfo/Payments/OutdatedDataStep";
 import FailedPaymentStep from "@/components/MyInfo/Payments/FailedPaymentStep";
 import SuccessfulPaymentStep from "@/components/MyInfo/Payments/SuccessfulPaymentStep";
+import firebaseServiceInstance from "@/services/firebase.service";
 
 export default function MyInfoPage() {
   const [step, setStep] = useState(1);
@@ -31,12 +32,11 @@ export default function MyInfoPage() {
     setstep3InputsArrayState(step3InputsArray);
   }, []);
 
-  const GetOptionsForCompanies = () => {
-    //Fetch companies and set in step1
+  const GetOptionsForCompanies = async () => {
+    let brokers = await firebaseServiceInstance.getBrokers();
     let presetCompaniesInStep1Array = step1InputsArray;
-    console.log(step1InputsArray);
-    let mockresult = ["S&J Arriendos", "Depas C.A.", "Arriendos de santiago"];
-    presetCompaniesInStep1Array[0].options = mockresult;
+    let parsedBrokers = brokers.map(element => element.data.name)
+    presetCompaniesInStep1Array[0].options = parsedBrokers;
     setstep1InputsArrayState(presetCompaniesInStep1Array);
   };
 
