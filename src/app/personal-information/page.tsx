@@ -15,7 +15,7 @@ import SuccessfulPaymentStep from "@/components/MyInfo/Payments/SuccessfulPaymen
 
 export default function MyInfoPage() {
   const [step, setStep] = useState(1);
-  const [applicationId, setApplicationId] = useState('');
+  const [applicationId, setApplicationId] = useState("");
   const [isCompany, setisCompany] = useState(true);
   const [isPerson, setisPerson] = useState(false);
   const [isDependantPerson, setIsDependantPerson] = useState(false);
@@ -25,10 +25,20 @@ export default function MyInfoPage() {
   const [step3InputsArrayState, setstep3InputsArrayState] = useState([{}]);
   useEffect(() => {
     //trae los datos cuando se entra a la pagina airlines
-    setstep1InputsArrayState(step1InputsArray);
+    GetOptionsForCompanies();
+    // setstep1InputsArrayState(step1InputsArray);
     setstep2InputsArrayState(step2InputsArray);
     setstep3InputsArrayState(step3InputsArray);
   }, []);
+
+  const GetOptionsForCompanies = () => {
+    //Fetch companies and set in step1
+    let presetCompaniesInStep1Array = step1InputsArray;
+    console.log(step1InputsArray);
+    let mockresult = ["S&J Arriendos", "Depas C.A.", "Arriendos de santiago"];
+    presetCompaniesInStep1Array[0].options = mockresult;
+    setstep1InputsArrayState(presetCompaniesInStep1Array);
+  };
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-center text-[#121212]">

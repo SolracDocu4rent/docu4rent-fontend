@@ -3,12 +3,12 @@ let step1InputsArray: step1InputInterface[] = [
     key: "0",
     db_key: "broker",
     input_id: 0,
-    input_type: 0, //0== textfield, 1 == combobox, 2==upload, 3== combobox and emerging textfield,4== true/false combobox
+    input_type: 1, //0== textfield, 1 == combobox, 2==upload, 3== combobox and emerging textfield,4== true/false combobox
     upper_text:
       "Nombre de la corredora, empresa o persona que recibe tu información",
-    options: [],
+    options: ["S&J Propiedades"],
     input_value: "",
-    input_label: "S&J Propiedades",
+    input_label: "Selecciona tu empresa",
     first_input: {},
     second_input: {},
     is_company: true,
