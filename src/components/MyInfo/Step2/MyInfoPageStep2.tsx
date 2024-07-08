@@ -128,13 +128,18 @@ export default function MyInfoPageStep3({
   };
 
   const nextStep = async () => {
-    if (step2InputsArrayState[15].input_value === "Dependiente") {
-      setIsDependantPerson(true);
-      setIsIndependantPerson(false);
-    } else {
-      setIsDependantPerson(false);
-      setIsIndependantPerson(true);
-    }
+    // if (step2InputsArrayState[15].input_value === "Dependiente") {
+    //   setIsDependantPerson(true);
+    //   setIsIndependantPerson(false);
+    // } else {
+    //   setIsDependantPerson(false);
+    //   setIsIndependantPerson(true);
+    // }
+    let personDependancy =
+      step2InputsArrayState[15].input_value === "Dependiente";
+    setIsDependantPerson(personDependancy);
+    setIsIndependantPerson(!personDependancy);
+
     console.log("applicationID", applicationId);
     if (applicationId != "") {
       try {

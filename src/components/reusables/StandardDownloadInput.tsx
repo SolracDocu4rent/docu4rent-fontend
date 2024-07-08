@@ -17,9 +17,17 @@ export const StandardDownloadInput = ({
   defaultValue,
 }: StandardDownloadInputProps) => {
   const [inputValue, setInputValue] = React.useState(defaultValue);
+
+  function uploadFunction() {
+    console.log("click");
+  }
+
   return (
     <>
-      <div className="w-[100%] font-['Montserrat', 'Poppins', 'Roboto', 'Helvetica', 'Arial'] cursor-pointer">
+      <div
+        onClick={() => uploadFunction}
+        className="w-[100%] font-['Montserrat', 'Poppins', 'Roboto', 'Helvetica', 'Arial'] cursor-pointer"
+      >
         <p className="text-[#121212] font-medium text-[16px] font-['Montserrat', 'Poppins', 'Roboto', 'Helvetica', 'Arial']">
           {upperText}
         </p>
