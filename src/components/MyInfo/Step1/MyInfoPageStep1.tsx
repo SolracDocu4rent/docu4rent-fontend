@@ -74,7 +74,7 @@ export default function MyInfoPageStep1({
     const currentUser = auth.currentUser;
     if (currentUser) {
       try {
-        let data: SaveData = { userId: currentUser.uid };
+        let data: SaveData = { userId: currentUser.uid, status: 'pending' };
         step1InputsArrayState.forEach((element: step1InputInterface) => {
           data[element.db_key] = element.input_value;
         });
