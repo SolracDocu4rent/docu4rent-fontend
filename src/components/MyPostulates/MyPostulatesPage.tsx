@@ -2,6 +2,8 @@ import RoundedButton from "@/components/reusables/RoundedButton";
 import { useEffect, useState } from "react";
 import { Dialog, TextField } from "@mui/material";
 import firebaseServiceInstance from "@/services/firebase.service";
+import { useRouter } from "next/navigation";
+import { auth } from "@/firebase/firebase";
 import {
   DataGrid,
   GridColDef,
@@ -11,6 +13,7 @@ import {
 import KeyboardArrowLeftRoundedIcon from "@mui/icons-material/KeyboardArrowLeftRounded";
 
 export default function MyPostulatesPage() {
+  const router = useRouter();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [openDetailDialog, setOpenDetailDialog] = useState(false);
@@ -41,7 +44,7 @@ export default function MyPostulatesPage() {
     numero: "",
     dpto: "",
     nombreEmpresa: "",
-    RutEmpresa: "",
+    RutEmpresa: 0,
     telefonoEmpresa: "",
     direccionEmpresa: "",
     antiguedadLaboral: "",
@@ -127,21 +130,30 @@ export default function MyPostulatesPage() {
 
   const [clickedFiltre, setclickedFiltre] = useState("Todas"); //for later use, working code
   const [arrayOfRows, setarrayOfRows] = useState(formsDataFormatted);
+
+  const getStatus = (data: any) => {
+    if (data === "pending") {
+      return "Pendiente";
+    } else if (data === "in progress") {
+      return "En Proceso";
+    }
+    return "";
+  };
+
   const getApplications = async () => {
-    await firebaseServiceInstance.getApplications().then((res) =>{
+    await firebaseServiceInstance.getApplications().then((res) => {
       setPostulatesData(res);
-      let y:any = [];
-      //console.log("getApplications",res);
-      res.map((index:any) =>{
-        let x={
-          type: index?.data?.type , //"Persona Natural" o "Empresa"
+      let y: any = [];
+      res.map((index: any) => {
+        let x = {
+          type: index?.data?.type, //"Persona Natural" o "Empresa"
           id: index?.id, //Nro de lote
-          receiver: index?.data?.brokerEmail,
-          receivingEmail: index?.data?.broker, //regulacion
-          endorsement: index?.data?.needCosigner? "Si" : "No", //nombre de producto
+          receiver: index?.data?.broker,
+          receivingEmail: index?.data?.brokerEmail, //regulacion
+          endorsement: index?.data?.needCosigner ? "Si" : "No", //nombre de producto
           shippingDate: "", //etapa
           validityDays: index?.data?.linkTime, //finca
-          status: "Rechazada", //status
+          status: getStatus(index?.data?.status), //status
           dateOfCreation: "", //Creado
           //document: "", //documento
           nombre: "",
@@ -159,68 +171,64 @@ export default function MyPostulatesPage() {
           numero: "",
           dpto: "",
           nombreEmpresa: "",
-          RutEmpresa: "",
-          telefonoEmpresa: "",
-          direccionEmpresa: "",
-          antiguedadLaboral: "",
+          RutEmpresa: index?.data?.brokerRut,
+          telefonoEmpresa: index?.data?.brokerPhone,
+          direccionEmpresa: index?.data?.brokerAddress,
+          antiguedadLaboral: index?.data?.contractLength,
           tipoTrabajador: "",
-          AFP: "",
-          ultimoPago: "",
-          sueldoBase: "",
-          sueldoLiquido: "",
-        }
+          AFP: index?.data?.afp,
+          ultimoPago: index?.data?.lastPayment,
+          sueldoBase: index?.data?.baseSalary,
+          sueldoLiquido: index?.data?.liquidSalary,
+          verInforme: index?.data?.status !== "in progress" ? false : true,
+        };
         y.push(x);
-        
       });
       setarrayOfRows(y);
-    }
-    );
-    
+    });
   };
-  
+
   const getApplicationsDetails = async (innerValueOfRow: any) => {
-    await firebaseServiceInstance.getApplicationData(innerValueOfRow?.id).then((res) =>
-      { //FALTA CORREO DE USUARIO,  REGION, NUMERO, BLOQUE, DATOS DE LA EMPRESA
+    await firebaseServiceInstance
+      .getApplicationData(innerValueOfRow?.id)
+      .then((res) => {
+        //FALTA CORREO DE USUARIO,  REGION, NUMERO, BLOQUE, DATOS DE LA EMPRESA
         let detailedRow = innerValueOfRow;
         detailedRow.estadoCivil = res[0]?.data?.civilStatus;
         detailedRow.comuna = res[0]?.data?.commune;
-        
-        if (detailedRow.type === "Empresa"){
-          detailedRow.nombre = res[0]?.data?.company?.legalRepresentativeName
-          detailedRow.apellidoMaterno = res[0]?.data?.company?.legalRepresentativeMotherLastName
-          detailedRow.apellidoPaterno = res[0]?.data?.company?.legalRepresentativeFatherLastName
-          detailedRow.RUT = res[0]?.data?.company?.legalRepresentativeRut
-        }else{
+
+        if (detailedRow.type === "Empresa") {
+          detailedRow.nombre = res[0]?.data?.company?.legalRepresentativeName;
+          detailedRow.apellidoMaterno =
+            res[0]?.data?.company?.legalRepresentativeMotherLastName;
+          detailedRow.apellidoPaterno =
+            res[0]?.data?.company?.legalRepresentativeFatherLastName;
+          detailedRow.RUT = res[0]?.data?.company?.legalRepresentativeRut;
+        } else {
           detailedRow.nombre = res[0]?.data?.name;
           detailedRow.apellidoPaterno = res[0]?.data?.fatherLastName;
           detailedRow.apellidoMaterno = res[0]?.data?.motherLastName;
           detailedRow.apellidoMaterno = res[0]?.data?.motherLastName;
           detailedRow.RUT = res[0]?.data?.rut;
         }
-        
+
         detailedRow.nacionalidad = res[0]?.data?.nationality;
         detailedRow.TelefonoContacto = res[0]?.data?.phone;
         detailedRow.profesion = res[0]?.data?.profession;
-        detailedRow.RutEmpresa = res[0]?.data?.company?.rut
+        //detailedRow.RutEmpresa = res[0]?.data?.brokerRut;
         detailedRow.direccion = res[0]?.data?.street;
         detailedRow.tipoTrabajador = res[0]?.data?.workerType;
-        
-        // console.log("getApplicationsDetails",res);
-        setDialogData(detailedRow)
-      }
-    );
+        //detailedRow.antiguedadLaboral = res[0]?.data?.contractLength;
+        setDialogData(detailedRow);
+      });
   };
 
   const getFullApplicationsData = async () => {
-    await firebaseServiceInstance.getFullApplicationsData().then((res) =>{
-      //console.log("full application",res)
-    }
-    );
-    
+    await firebaseServiceInstance.getFullApplicationsData().then((res) => {});
   };
 
   useEffect(() => {
-    //trae los datos cuando se entra a la pagina 
+    //trae los datos cuando se entra a la pagina
     getApplications();
     //getFullApplicationsData();
     //getApplicationsDetails("xd");
@@ -328,8 +336,8 @@ export default function MyPostulatesPage() {
       headerName: "Documento",
       editable: false,
       headerClassName: "theme--header",
-      minWidth: 100,
-      maxWidth: 100,
+      minWidth: 160,
+      maxWidth: 200,
       renderCell: RenderApplication,
     },
     /*{ //commenting download column for later use
@@ -365,7 +373,7 @@ export default function MyPostulatesPage() {
         </div>
       );
     }
-    if (innerValueOfRow === "Aclaracion") {
+    if (innerValueOfRow === "Pendiente") {
       return (
         <div className="h-[100%] w-[100%] flex items-center ">
           <div className="bg-[#FFD700] text-white h-[28px] w-[150px] flex justify-center items-center rounded-full">
@@ -403,19 +411,22 @@ export default function MyPostulatesPage() {
 
   function RenderApplication(props: GridRenderCellParams<any>) {
     const innerValueOfRow = props?.row;
-    
+
     return (
       <div className="text-decoration-line: underline text-[#BBBBBB] cursor-pointer ">
         <p
           onClick={() => {
-            //console.log("innerValueOfRow", innerValueOfRow);
-            getApplicationsDetails(innerValueOfRow);
-            //setDialogData(innerValueOfRow);
-            setOpenDetailDialog(true);
+            if (innerValueOfRow?.verInforme) {
+              getApplicationsDetails(innerValueOfRow);
+              //setDialogData(innerValueOfRow);
+              setOpenDetailDialog(true);
+            }
           }}
           className="hover:font-semibold"
         >
-          Ver Informe
+          {innerValueOfRow?.verInforme
+            ? "Ver Informe"
+            : "Informe No disponible"}
         </p>
       </div>
     );
@@ -535,7 +546,7 @@ export default function MyPostulatesPage() {
             <div className=" w-[50%] border-b-[2.5px] border-b-gray">
               <p className="text-[12px] text-[#466197]">Coreo electrónico</p>
               <p className="text-[#121212] text-[18px] ">
-                {dialogData?.correoElectronico}
+                {auth?.currentUser?.email}
               </p>
             </div>
           </div>
@@ -544,9 +555,7 @@ export default function MyPostulatesPage() {
           </p>
           <div className="flex flex-row gap-[5%] p-5">
             <div className=" w-[45%] border-b-[2.5px] border-b-gray">
-              <p className="text-[12px] text-[#466197]">
-                Región
-              </p>
+              <p className="text-[12px] text-[#466197]">Región</p>
               <p className="text-[#121212] text-[18px] ">
                 {dialogData?.region}
               </p>
@@ -583,7 +592,7 @@ export default function MyPostulatesPage() {
             <div className=" w-[45%] border-b-[2.5px] border-b-gray">
               <p className="text-[12px] text-[#466197]">Nombre Empresa</p>
               <p className="text-[#121212] text-[18px] ">
-                {dialogData?.nombreEmpresa}
+                {dialogData?.receiver}
               </p>
             </div>
             <div className=" w-[22.5%] border-b-[2.5px] border-b-gray">
@@ -667,7 +676,7 @@ export default function MyPostulatesPage() {
             <div className="pb-[20px]">
               <RoundedButton
                 executableFunction={() => {
-                  console.log("click");
+                  router.push("/personal-information");
                 }}
                 buttonText="Enviar Documento"
                 rounded={true}

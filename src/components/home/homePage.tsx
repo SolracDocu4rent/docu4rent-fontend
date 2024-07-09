@@ -33,55 +33,54 @@ export default function HomePage() {
     let x: any = [];
     x.push({ key: 1, name: "nombre", status: "Rechazados" });
     //setarrayOfNotifications(mockdata); //comentar para ver los envios vacios. Descomentar para ver mock data
-
-
   }, []);
-  
+
   const getApplicationsDetails = async (innerValueOfRow: any) => {
-    await firebaseServiceInstance.getApplicationData(innerValueOfRow?.id).then((res) =>
-      { //FALTA CORREO DE USUARIO,  REGION, NUMERO, BLOQUE, DATOS DE LA EMPRESA
+    await firebaseServiceInstance
+      .getApplicationData(innerValueOfRow?.id)
+      .then((res) => {
+        //FALTA CORREO DE USUARIO,  REGION, NUMERO, BLOQUE, DATOS DE LA EMPRESA
         let detailedRow = innerValueOfRow;
         detailedRow.comuna = res[0]?.data?.commune;
         detailedRow.direccion = res[0]?.data?.street;
-        return(detailedRow)
-      }
-    );
+        return detailedRow;
+      });
   };
 
-
-
+  const getStatus = (data: any) => {
+    if (data === "pending") {
+      return "Pendiente";
+    } else if (data === "in progress") {
+      return "En Proceso";
+    }
+    return "";
+  };
 
   const getFullApplicationsData = async () => {
-    await firebaseServiceInstance.getFullApplicationsData().then((res) =>{
-      let y:any = [];
+    await firebaseServiceInstance.getFullApplicationsData().then((res) => {
+      let y: any = [];
       let cont = 0;
       //maybe res should be ordered by date of creation DESC
-      res.map(async (index:any) =>{
+      res.map(async (index: any) => {
         cont++;
         if (cont < 15) {
-          let x={
+          let x = {
             id: index?.id, //Nro de lote
-            status: "Rechazada", //status
+            status: getStatus(index?.status), //status
             region: index?.region,
             comuna: index?.commune,
-            direccion: index?.street
+            direccion: index?.street,
           };
           y.push(x);
-
-          
         }
-        
-        
       });
-      
+
       setarrayOfNotifications(y);
-    }
-    );
-    
+    });
   };
 
   useEffect(() => {
-    //trae los datos cuando se entra a la pagina 
+    //trae los datos cuando se entra a la pagina
     //getApplications();
     getFullApplicationsData();
 
@@ -100,11 +99,11 @@ export default function HomePage() {
     } else {
       arrayOfNotifications.map((index: any) => {
         let bgOfStatus =
-          index?.status === "En proceso"
+          index?.status === "En Proceso"
             ? " bg-[#4086c3]"
             : index?.status === "Rechazada"
             ? " bg-[#CF2828]"
-            : index?.status === "Aclaración"
+            : index?.status === "Pendiente"
             ? " bg-[#FFD700]"
             : index?.status === "Aprobada"
             ? " bg-[#01964E]"
@@ -117,7 +116,11 @@ export default function HomePage() {
           >
             <div className="flex flex-row items-center gap-3">
               <NotificationsNoneRoundedIcon htmlColor="#121212" />
-              <p className="font-medium">{index?.direccion && index?.direccion } { " " + index?.comuna && index?.comuna } { " " + index?.region && index?.region}</p>
+              <p className="font-medium">
+                {index?.direccion && index?.direccion}{" "}
+                {" " + index?.comuna && index?.comuna}{" "}
+                {" " + index?.region && index?.region}
+              </p>
             </div>
             <div
               className={
@@ -152,7 +155,7 @@ export default function HomePage() {
               <AddBoxOutlinedIcon htmlColor="#093BA0" />
               <p
                 onClick={() => {
-                  router.push("/MyPostulates");
+                  router.push("/applications");
                 }}
                 className="text-[#093BA0] font-semibold hover:font-bold text-[14px] "
               >
