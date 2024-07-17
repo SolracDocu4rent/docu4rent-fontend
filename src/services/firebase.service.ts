@@ -108,12 +108,21 @@ class FirebaseService {
   async getApplications(): Promise<any> {
     try {
       const currentUser = auth.currentUser;
-      if (currentUser) {
+      const userData = await this.getCurrentUser();
+      if (currentUser && userData) {
+        console.log('userData: ', userData)
         let userId = currentUser.uid
-        const q = query(
+        let q = query(
           collection(firestore, 'applications'),
           where('userId', '==', userId)
         );
+
+        if (userData.role != "customer") {
+          q = query(
+            collection(firestore, 'applications'),
+            where('broker', '==', userData.name)
+          );
+        }
         const querySnapshot = await getDocs(q);
         const applications: DocumentData[] = [];
         querySnapshot.forEach((doc) => {
