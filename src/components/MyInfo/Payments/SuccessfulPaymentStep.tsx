@@ -1,11 +1,13 @@
 import { useState } from "react";
 import RoundedButton from "@/components/reusables/RoundedButton";
 import CheckCircleRoundedIcon from "@mui/icons-material/CheckCircleRounded";
+import { useRouter } from "next/navigation";
 interface ComponentProps {
   setStep: (value: number) => void;
 }
 
 export default function SuccessfulPaymentStep({ setStep }: ComponentProps) {
+  const router = useRouter();
   const [mercadoPagoOption, setmercadoPagoOption] = useState(false);
   let borderMercadoPago =
     "relative border-2 cursor-pointer hover:border-[#0C8CE9] border-[#BBBBB] w-fit rounded-md py-[20px] pl-[20px] pr-[100px]";
@@ -33,7 +35,8 @@ export default function SuccessfulPaymentStep({ setStep }: ComponentProps) {
         <div className="flex flex-row justify-center pt-[70px] gap-5">
           <RoundedButton
             executableFunction={() => {
-              setStep(100);
+              //setStep(100);
+              router.push("/applications");
             }}
             buttonText="Mis postulaciones"
             rounded
